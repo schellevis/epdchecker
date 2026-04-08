@@ -2,6 +2,7 @@
 'use strict';
 
 const { chromium } = require('playwright');
+const dns = require('node:dns').promises;
 const fs = require('fs');
 const path = require('path');
 
@@ -12,6 +13,7 @@ const SCREENSHOTS_DIR = path.join(DIST_DIR, 'screenshots');
 const CONCURRENCY = 5;
 const HTTP_TIMEOUT = 12000;
 const NAV_TIMEOUT = 20000;
+const HIX365_IP = '20.86.217.65';
 
 fs.mkdirSync(SCREENSHOTS_DIR, { recursive: true });
 // Prevent GitHub Pages from running Jekyll
@@ -57,6 +59,15 @@ async function takeScreenshot(browser, url, filename) {
   }
 }
 
+async function resolveAddresses(hostname) {
+  try {
+    const records = await dns.lookup(hostname, { all: true });
+    return [...new Set(records.map(record => record.address))];
+  } catch {
+    return [];
+  }
+}
+
 async function runWithConcurrency(items, fn, limit) {
   const results = new Array(items.length);
   let index = 0;
@@ -84,7 +95,10 @@ async function main() {
     const slug = hospital.domain.replace(/[^a-z0-9]/gi, '_');
     const screenshotFile = path.join(SCREENSHOTS_DIR, `${slug}.jpg`);
 
-    const { status, ok } = await checkHttp(url);
+    const [{ status, ok }, resolvedAddresses] = await Promise.all([
+      checkHttp(url),
+      resolveAddresses(hospital.domain),
+    ]);
     const label = ok ? '✓' : '✗';
     console.log(`${label} [${String(status).padStart(3)}] ${hospital.domain}`);
 
@@ -95,6 +109,8 @@ async function main() {
       url,
       status,
       ok,
+      resolvedAddresses,
+      isHix365: resolvedAddresses.includes(HIX365_IP),
       screenshotPath: hasScreenshot ? `screenshots/${slug}.jpg` : null,
     };
   }, CONCURRENCY);
@@ -137,10 +153,13 @@ function formatTimestamp(date) {
   });
 }
 
-function card(h) {
+function card(h, cacheKey) {
   const { text, css } = statusLabel(h.status);
+  const extraBadges = h.isHix365
+    ? `<span class="badge badge-tag">hix365</span>`
+    : '';
   const imgHtml = h.screenshotPath
-    ? `<img src="${h.screenshotPath}" alt="Screenshot ${h.name}" loading="lazy"
+    ? `<img src="${h.screenshotPath}?v=${cacheKey}" alt="Screenshot ${h.name}" loading="lazy"
             onclick="openLightbox(this.src,'${h.name.replace(/'/g, "\\'")}')">`
     : `<div class="no-screenshot">Geen screenshot beschikbaar</div>`;
 
@@ -152,7 +171,10 @@ function card(h) {
         <div class="hospital-url">
           <a href="${h.url}" target="_blank" rel="noopener">${h.domain}</a>
         </div>
-        <span class="badge badge-${css}">${text}</span>
+        <div class="badge-row">
+          <span class="badge badge-${css}">${text}</span>
+          ${extraBadges}
+        </div>
       </div>
     </div>`;
 }
@@ -160,11 +182,12 @@ function card(h) {
 function generateHtml(results, checkedAt) {
   const offline = results.filter(r => !r.ok);
   const online  = results.filter(r =>  r.ok);
+  const hix365Offline = offline.filter(r => r.isHix365);
+  const hix365Online = online.filter(r => r.isHix365);
+  const cacheKey = checkedAt.getTime();
 
-  const offlineCards = offline.map(card).join('');
-  const onlineCards  = online.map(card).join('');
-
-  const nextCheck = new Date(checkedAt.getTime() + 10 * 60 * 1000);
+  const offlineCards = offline.map(h => card(h, cacheKey)).join('');
+  const onlineCards  = online.map(h => card(h, cacheKey)).join('');
 
   return `<!DOCTYPE html>
 <html lang="nl">
@@ -375,10 +398,19 @@ function generateHtml(results, checkedAt) {
       font-size: 0.75rem;
       font-weight: 600;
     }
+    .badge-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 8px;
+    }
+    .badge-row .badge { margin-top: 0; }
     .badge-ok       { background: var(--badge-ok-bg);  color: var(--badge-ok-color); }
     .badge-err503   { background: var(--badge-503-bg); color: var(--badge-503-color); }
     .badge-err000   { background: var(--badge-000-bg); color: var(--badge-000-color); }
     .badge-errOther { background: var(--badge-oth-bg); color: var(--badge-oth-color); }
+    .badge-tag      { background: rgba(2,132,199,0.12); color: var(--accent); }
 
     /* Lightbox */
     #lightbox {
@@ -428,14 +460,15 @@ function generateHtml(results, checkedAt) {
 <header>
   <h1>EPD Status <span>Monitor</span></h1>
   <div class="meta">
-    <strong>Laatste check:</strong> ${formatTimestamp(checkedAt)}<br>
-    <strong>Volgende check:</strong> ~${formatTimestamp(nextCheck)}
+    <strong>Laatste check:</strong> ${formatTimestamp(checkedAt)}
   </div>
 </header>
 
 <div class="summary-bar">
   <span class="pill pill-offline"><span class="dot"></span>${offline.length} offline</span>
   <span class="pill pill-online"><span class="dot"></span>${online.length} online</span>
+  <span class="pill pill-offline"><span class="dot"></span>${hix365Offline.length} hix365 offline</span>
+  <span class="pill pill-online"><span class="dot"></span>${hix365Online.length} hix365 online</span>
   <span style="color:#475569;font-size:0.8rem">van ${results.length} EPD-portalen</span>
 </div>
 
