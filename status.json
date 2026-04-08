@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-04-08T09:39:36.587Z",
+  "checkedAt": "2026-04-08T10:10:13.648Z",
   "results": [
     {
       "domain": "mijn.adrz.nl",
@@ -11,7 +11,7 @@
         "20.86.217.65"
       ],
       "isHix365": true,
-      "screenshotPath": "screenshots/mijn_adrz_nl.jpg"
+      "screenshotPath": null
     },
     {
       "domain": "mijn-bovenij.hix365.nl",
@@ -41,13 +41,13 @@
       "domain": "mijn-diakonessenhuis.hix365.nl",
       "name": "Diakonessenhuis Utrecht",
       "url": "https://mijn-diakonessenhuis.hix365.nl",
-      "status": 503,
+      "status": 0,
       "ok": false,
       "resolvedAddresses": [
         "20.86.217.65"
       ],
       "isHix365": true,
-      "screenshotPath": "screenshots/mijn_diakonessenhuis_hix365_nl.jpg"
+      "screenshotPath": null
     },
     {
       "domain": "mijn.dijklander.nl",
@@ -144,18 +144,6 @@
       ],
       "isHix365": true,
       "screenshotPath": "screenshots/mijn_tergooi_nl.jpg"
-    },
-    {
-      "domain": "www.geldersevallei.nl",
-      "name": "Ziekenhuis Gelderse Vallei",
-      "url": "https://www.geldersevallei.nl",
-      "status": 500,
-      "ok": false,
-      "resolvedAddresses": [
-        "213.160.249.173"
-      ],
-      "isHix365": false,
-      "screenshotPath": "screenshots/www_geldersevallei_nl.jpg"
     },
     {
       "domain": "mijn.asz.nl",
@@ -793,6 +781,18 @@
       ],
       "isHix365": false,
       "screenshotPath": "screenshots/mijnzha_ziekenhuisamstelland_nl.jpg"
+    },
+    {
+      "domain": "www.geldersevallei.nl",
+      "name": "Ziekenhuis Gelderse Vallei",
+      "url": "https://www.geldersevallei.nl",
+      "status": 200,
+      "ok": true,
+      "resolvedAddresses": [
+        "213.160.249.173"
+      ],
+      "isHix365": false,
+      "screenshotPath": "screenshots/www_geldersevallei_nl.jpg"
     },
     {
       "domain": "mijn.ziekenhuisrivierenland.nl",
