@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-04-08T06:46:05.536Z",
+  "checkedAt": "2026-04-08T07:56:34.286Z",
   "results": [
     {
       "domain": "mijn.adrz.nl",
@@ -12,28 +12,6 @@
       ],
       "isHix365": true,
       "screenshotPath": "screenshots/mijn_adrz_nl.jpg"
-    },
-    {
-      "domain": "mijn.asz.nl",
-      "name": "Albert Schweitzer Ziekenhuis",
-      "url": "https://mijn.asz.nl",
-      "status": 0,
-      "ok": false,
-      "resolvedAddresses": [
-        "20.86.217.65"
-      ],
-      "isHix365": true,
-      "screenshotPath": "screenshots/mijn_asz_nl.jpg"
-    },
-    {
-      "domain": "mijn.bernhoven.nl",
-      "name": "Bernhoven",
-      "url": "https://mijn.bernhoven.nl",
-      "status": 0,
-      "ok": false,
-      "resolvedAddresses": [],
-      "isHix365": false,
-      "screenshotPath": "screenshots/mijn_bernhoven_nl.jpg"
     },
     {
       "domain": "mijn-bovenij.hix365.nl",
@@ -156,6 +134,18 @@
       "screenshotPath": "screenshots/mijn_tergooi_nl.jpg"
     },
     {
+      "domain": "mijn.asz.nl",
+      "name": "Albert Schweitzer Ziekenhuis",
+      "url": "https://mijn.asz.nl",
+      "status": 200,
+      "ok": true,
+      "resolvedAddresses": [
+        "20.86.217.65"
+      ],
+      "isHix365": true,
+      "screenshotPath": "screenshots/mijn_asz_nl.jpg"
+    },
+    {
       "domain": "mijn.alrijne.nl",
       "name": "Alrijne Ziekenhuis",
       "url": "https://mijn.alrijne.nl",
@@ -190,6 +180,18 @@
       ],
       "isHix365": false,
       "screenshotPath": "screenshots/mijndossier_amsterdamumc_nl.jpg"
+    },
+    {
+      "domain": "mijn.bernhoven.nl",
+      "name": "Bernhoven",
+      "url": "https://mijn.bernhoven.nl",
+      "status": 200,
+      "ok": true,
+      "resolvedAddresses": [
+        "20.86.217.65"
+      ],
+      "isHix365": true,
+      "screenshotPath": "screenshots/mijn_bernhoven_nl.jpg"
     },
     {
       "domain": "mijn.catharinaziekenhuis.nl",
@@ -450,7 +452,6 @@
       "status": 200,
       "ok": true,
       "resolvedAddresses": [
-        "2001:67c:1134:2104::11",
         "194.13.164.21"
       ],
       "isHix365": false,
@@ -583,8 +584,7 @@
       "status": 200,
       "ok": true,
       "resolvedAddresses": [
-        "2606:4700::6812:1883",
-        "2606:4700::6812:1983",
+        "104.18.24.131",
         "104.18.25.131"
       ],
       "isHix365": false,
