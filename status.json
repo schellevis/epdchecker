@@ -1,0 +1,565 @@
+{
+  "checkedAt": "2026-04-08T06:10:57.612Z",
+  "results": [
+    {
+      "domain": "mijn.adrz.nl",
+      "name": "Admiraal De Ruyter Ziekenhuis",
+      "url": "https://mijn.adrz.nl",
+      "status": 503,
+      "ok": false,
+      "screenshotPath": "screenshots/mijn_adrz_nl.jpg"
+    },
+    {
+      "domain": "mijn.asz.nl",
+      "name": "Albert Schweitzer Ziekenhuis",
+      "url": "https://mijn.asz.nl",
+      "status": 503,
+      "ok": false,
+      "screenshotPath": "screenshots/mijn_asz_nl.jpg"
+    },
+    {
+      "domain": "mijn.bernhoven.nl",
+      "name": "Bernhoven",
+      "url": "https://mijn.bernhoven.nl",
+      "status": 0,
+      "ok": false,
+      "screenshotPath": "screenshots/mijn_bernhoven_nl.jpg"
+    },
+    {
+      "domain": "mijn-bovenij.hix365.nl",
+      "name": "Bovenij Ziekenhuis",
+      "url": "https://mijn-bovenij.hix365.nl",
+      "status": 503,
+      "ok": false,
+      "screenshotPath": "screenshots/mijn_bovenij_hix365_nl.jpg"
+    },
+    {
+      "domain": "mijnbravis.hix365.nl",
+      "name": "Bravis Ziekenhuis",
+      "url": "https://mijnbravis.hix365.nl",
+      "status": 503,
+      "ok": false,
+      "screenshotPath": "screenshots/mijnbravis_hix365_nl.jpg"
+    },
+    {
+      "domain": "mijn.dijklander.nl",
+      "name": "Dijklander Ziekenhuis",
+      "url": "https://mijn.dijklander.nl",
+      "status": 503,
+      "ok": false,
+      "screenshotPath": "screenshots/mijn_dijklander_nl.jpg"
+    },
+    {
+      "domain": "mijn-ijsselland.hix365.nl",
+      "name": "IJsselland Ziekenhuis",
+      "url": "https://mijn-ijsselland.hix365.nl",
+      "status": 0,
+      "ok": false,
+      "screenshotPath": "screenshots/mijn_ijsselland_hix365_nl.jpg"
+    },
+    {
+      "domain": "mijn.lzr.nl",
+      "name": "Langeland Ziekenhuis",
+      "url": "https://mijn.lzr.nl",
+      "status": 503,
+      "ok": false,
+      "screenshotPath": "screenshots/mijn_lzr_nl.jpg"
+    },
+    {
+      "domain": "mijn.meandermc.nl",
+      "name": "Meander Medisch Centrum",
+      "url": "https://mijn.meandermc.nl",
+      "status": 503,
+      "ok": false,
+      "screenshotPath": "screenshots/mijn_meandermc_nl.jpg"
+    },
+    {
+      "domain": "patientportaal.mijnnijsmellinghe.nl",
+      "name": "Nij Smellinghe",
+      "url": "https://patientportaal.mijnnijsmellinghe.nl",
+      "status": 0,
+      "ok": false,
+      "screenshotPath": null
+    },
+    {
+      "domain": "mijn.saxenburgh.nl",
+      "name": "Saxenburgh Groep",
+      "url": "https://mijn.saxenburgh.nl",
+      "status": 503,
+      "ok": false,
+      "screenshotPath": "screenshots/mijn_saxenburgh_nl.jpg"
+    },
+    {
+      "domain": "mijn.sjgweert.nl",
+      "name": "St. Jans Gasthuis Weert",
+      "url": "https://mijn.sjgweert.nl",
+      "status": 503,
+      "ok": false,
+      "screenshotPath": "screenshots/mijn_sjgweert_nl.jpg"
+    },
+    {
+      "domain": "mijn.tergooi.nl",
+      "name": "Tergooi MC",
+      "url": "https://mijn.tergooi.nl",
+      "status": 503,
+      "ok": false,
+      "screenshotPath": "screenshots/mijn_tergooi_nl.jpg"
+    },
+    {
+      "domain": "mijn.alrijne.nl",
+      "name": "Alrijne Ziekenhuis",
+      "url": "https://mijn.alrijne.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijn_alrijne_nl.jpg"
+    },
+    {
+      "domain": "mijn.amphia.nl",
+      "name": "Amphia Ziekenhuis",
+      "url": "https://mijn.amphia.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijn_amphia_nl.jpg"
+    },
+    {
+      "domain": "mijndossier.amsterdamumc.nl",
+      "name": "Amsterdam UMC",
+      "url": "https://mijndossier.amsterdamumc.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijndossier_amsterdamumc_nl.jpg"
+    },
+    {
+      "domain": "mijn.catharinaziekenhuis.nl",
+      "name": "Catharina Ziekenhuis",
+      "url": "https://mijn.catharinaziekenhuis.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijn_catharinaziekenhuis_nl.jpg"
+    },
+    {
+      "domain": "mijn.dz.nl",
+      "name": "Deventer Ziekenhuis",
+      "url": "https://mijn.dz.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijn_dz_nl.jpg"
+    },
+    {
+      "domain": "mijn-diakonessenhuis.hix365.nl",
+      "name": "Diakonessenhuis Utrecht",
+      "url": "https://mijn-diakonessenhuis.hix365.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijn_diakonessenhuis_hix365_nl.jpg"
+    },
+    {
+      "domain": "mijn.elkerliek.nl",
+      "name": "Elkerliek Ziekenhuis",
+      "url": "https://mijn.elkerliek.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijn_elkerliek_nl.jpg"
+    },
+    {
+      "domain": "pp.erasmusmc.nl",
+      "name": "Erasmus MC",
+      "url": "https://pp.erasmusmc.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/pp_erasmusmc_nl.jpg"
+    },
+    {
+      "domain": "www.mijnetz.nl",
+      "name": "ETZ (Elisabeth-TweeSteden Ziekenhuis)",
+      "url": "https://www.mijnetz.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/www_mijnetz_nl.jpg"
+    },
+    {
+      "domain": "mijnflevoziekenhuis.hix365.nl",
+      "name": "Flevoziekenhuis",
+      "url": "https://mijnflevoziekenhuis.hix365.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijnflevoziekenhuis_hix365_nl.jpg"
+    },
+    {
+      "domain": "mijn.franciscus.nl",
+      "name": "Franciscus Gasthuis & Vlietland",
+      "url": "https://mijn.franciscus.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijn_franciscus_nl.jpg"
+    },
+    {
+      "domain": "mijn.gelreziekenhuizen.nl",
+      "name": "Gelre Ziekenhuizen",
+      "url": "https://mijn.gelreziekenhuizen.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijn_gelreziekenhuizen_nl.jpg"
+    },
+    {
+      "domain": "www.mijnghz.nl",
+      "name": "Groene Hart Ziekenhuis",
+      "url": "https://www.mijnghz.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/www_mijnghz_nl.jpg"
+    },
+    {
+      "domain": "mijn.haaglandenmc.nl",
+      "name": "Haaglanden Medisch Centrum",
+      "url": "https://mijn.haaglandenmc.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijn_haaglandenmc_nl.jpg"
+    },
+    {
+      "domain": "mijn.hagaziekenhuis.nl",
+      "name": "HagaZiekenhuis",
+      "url": "https://mijn.hagaziekenhuis.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijn_hagaziekenhuis_nl.jpg"
+    },
+    {
+      "domain": "mijn.ikazia.nl",
+      "name": "Ikazia Ziekenhuis",
+      "url": "https://mijn.ikazia.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijn_ikazia_nl.jpg"
+    },
+    {
+      "domain": "mijnisala.nl",
+      "name": "Isala",
+      "url": "https://mijnisala.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijnisala_nl.jpg"
+    },
+    {
+      "domain": "mijn.jbz.nl",
+      "name": "Jeroen Bosch Ziekenhuis",
+      "url": "https://mijn.jbz.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijn_jbz_nl.jpg"
+    },
+    {
+      "domain": "mijn.lumc.nl",
+      "name": "Leids Universitair Medisch Centrum",
+      "url": "https://mijn.lumc.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijn_lumc_nl.jpg"
+    },
+    {
+      "domain": "mijn.maasstadziekenhuis.nl",
+      "name": "Maasstad Ziekenhuis",
+      "url": "https://mijn.maasstadziekenhuis.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijn_maasstadziekenhuis_nl.jpg"
+    },
+    {
+      "domain": "mijn.mumc.nl",
+      "name": "Maastricht UMC+",
+      "url": "https://mijn.mumc.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijn_mumc_nl.jpg"
+    },
+    {
+      "domain": "mijn.mzh.nl",
+      "name": "Martini Ziekenhuis",
+      "url": "https://mijn.mzh.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijn_mzh_nl.jpg"
+    },
+    {
+      "domain": "mijn.mmc.nl",
+      "name": "Máxima MC",
+      "url": "https://mijn.mmc.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijn_mmc_nl.jpg"
+    },
+    {
+      "domain": "www.mijnmcl.nl",
+      "name": "Medisch Centrum Leeuwarden",
+      "url": "https://www.mijnmcl.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/www_mijnmcl_nl.jpg"
+    },
+    {
+      "domain": "mijn.mst.nl",
+      "name": "Medisch Spectrum Twente",
+      "url": "https://mijn.mst.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijn_mst_nl.jpg"
+    },
+    {
+      "domain": "www.mijngezondheid.net",
+      "name": "MijnGezondheid.net",
+      "url": "https://www.mijngezondheid.net",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/www_mijngezondheid_net.jpg"
+    },
+    {
+      "domain": "mijnnoordwest.nl",
+      "name": "Noordwest Ziekenhuisgroep",
+      "url": "https://mijnnoordwest.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijnnoordwest_nl.jpg"
+    },
+    {
+      "domain": "mijnolvg.nl",
+      "name": "OLVG",
+      "url": "https://mijnolvg.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijnolvg_nl.jpg"
+    },
+    {
+      "domain": "www.ommelanderziekenhuis.nl",
+      "name": "Ommelander Ziekenhuis Groningen",
+      "url": "https://www.ommelanderziekenhuis.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/www_ommelanderziekenhuis_nl.jpg"
+    },
+    {
+      "domain": "www.mijnpantein.nl",
+      "name": "Pantein",
+      "url": "https://www.mijnpantein.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/www_mijnpantein_nl.jpg"
+    },
+    {
+      "domain": "www.praktijkportal.nl",
+      "name": "PraktijkPortal",
+      "url": "https://www.praktijkportal.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/www_praktijkportal_nl.jpg"
+    },
+    {
+      "domain": "mijnradboud.radboudumc.nl",
+      "name": "Radboud UMC",
+      "url": "https://mijnradboud.radboudumc.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijnradboud_radboudumc_nl.jpg"
+    },
+    {
+      "domain": "mijn.reinierdegraaf.nl",
+      "name": "Reinier de Graaf",
+      "url": "https://mijn.reinierdegraaf.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijn_reinierdegraaf_nl.jpg"
+    },
+    {
+      "domain": "mijn.rijnstate.nl",
+      "name": "Rijnstate",
+      "url": "https://mijn.rijnstate.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijn_rijnstate_nl.jpg"
+    },
+    {
+      "domain": "client.rivas.nl",
+      "name": "Rivas Zorggroep",
+      "url": "https://client.rivas.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/client_rivas_nl.jpg"
+    },
+    {
+      "domain": "mijn.rkz.nl",
+      "name": "Rode Kruis Ziekenhuis",
+      "url": "https://mijn.rkz.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijn_rkz_nl.jpg"
+    },
+    {
+      "domain": "mijn.slingeland.nl",
+      "name": "Slingeland Ziekenhuis",
+      "url": "https://mijn.slingeland.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijn_slingeland_nl.jpg"
+    },
+    {
+      "domain": "www.mijnspaarnegasthuis.nl",
+      "name": "Spaarne Gasthuis",
+      "url": "https://www.mijnspaarnegasthuis.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/www_mijnspaarnegasthuis_nl.jpg"
+    },
+    {
+      "domain": "mijn.spijkenissemc.nl",
+      "name": "Spijkenisse Medisch Centrum",
+      "url": "https://mijn.spijkenissemc.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijn_spijkenissemc_nl.jpg"
+    },
+    {
+      "domain": "mijnantonius.antoniusziekenhuis.nl",
+      "name": "St. Antonius Ziekenhuis",
+      "url": "https://mijnantonius.antoniusziekenhuis.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijnantonius_antoniusziekenhuis_nl.jpg"
+    },
+    {
+      "domain": "patient.mijnantonius.nl",
+      "name": "St. Antonius Ziekenhuis (portaal 2)",
+      "url": "https://patient.mijnantonius.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/patient_mijnantonius_nl.jpg"
+    },
+    {
+      "domain": "mijn.stjansdal.nl",
+      "name": "St. Jansdal",
+      "url": "https://mijn.stjansdal.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijn_stjansdal_nl.jpg"
+    },
+    {
+      "domain": "mijnskb.skbwinterswijk.nl",
+      "name": "Streekziekenhuis Koningin Beatrix",
+      "url": "https://mijnskb.skbwinterswijk.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijnskb_skbwinterswijk_nl.jpg"
+    },
+    {
+      "domain": "portaal.mijntjongerschans.nl",
+      "name": "Tjongerschans",
+      "url": "https://portaal.mijntjongerschans.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/portaal_mijntjongerschans_nl.jpg"
+    },
+    {
+      "domain": "www.mijntreant.nl",
+      "name": "Treant Zorggroep",
+      "url": "https://www.mijntreant.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/www_mijntreant_nl.jpg"
+    },
+    {
+      "domain": "zorgpp.umcutrecht.nl",
+      "name": "UMC Utrecht",
+      "url": "https://zorgpp.umcutrecht.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/zorgpp_umcutrecht_nl.jpg"
+    },
+    {
+      "domain": "mijn.umcg.nl",
+      "name": "UMCG",
+      "url": "https://mijn.umcg.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijn_umcg_nl.jpg"
+    },
+    {
+      "domain": "mijn.vanweelbethesda.nl",
+      "name": "Van Weel-Bethesda Ziekenhuis",
+      "url": "https://mijn.vanweelbethesda.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijn_vanweelbethesda_nl.jpg"
+    },
+    {
+      "domain": "mijnviecuri.viecuri.nl",
+      "name": "VieCuri Medisch Centrum",
+      "url": "https://mijnviecuri.viecuri.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijnviecuri_viecuri_nl.jpg"
+    },
+    {
+      "domain": "mijn.wza.nl",
+      "name": "Wilhelmina Ziekenhuis Assen",
+      "url": "https://mijn.wza.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijn_wza_nl.jpg"
+    },
+    {
+      "domain": "mijn.zmc.nl",
+      "name": "Zaans Medisch Centrum",
+      "url": "https://mijn.zmc.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijn_zmc_nl.jpg"
+    },
+    {
+      "domain": "mijnzha.ziekenhuisamstelland.nl",
+      "name": "Ziekenhuis Amstelland",
+      "url": "https://mijnzha.ziekenhuisamstelland.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijnzha_ziekenhuisamstelland_nl.jpg"
+    },
+    {
+      "domain": "www.geldersevallei.nl",
+      "name": "Ziekenhuis Gelderse Vallei",
+      "url": "https://www.geldersevallei.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/www_geldersevallei_nl.jpg"
+    },
+    {
+      "domain": "mijn.ziekenhuisrivierenland.nl",
+      "name": "Ziekenhuis Rivierenland",
+      "url": "https://mijn.ziekenhuisrivierenland.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijn_ziekenhuisrivierenland_nl.jpg"
+    },
+    {
+      "domain": "mijn.zgt.nl",
+      "name": "Ziekenhuisgroep Twente",
+      "url": "https://mijn.zgt.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijn_zgt_nl.jpg"
+    },
+    {
+      "domain": "patient.zorgsaam.org",
+      "name": "Zorgsaam Zeeuws-Vlaanderen",
+      "url": "https://patient.zorgsaam.org",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/patient_zorgsaam_org.jpg"
+    },
+    {
+      "domain": "mijn.zuyderland.nl",
+      "name": "Zuyderland Medisch Centrum",
+      "url": "https://mijn.zuyderland.nl",
+      "status": 200,
+      "ok": true,
+      "screenshotPath": "screenshots/mijn_zuyderland_nl.jpg"
+    }
+  ]
+}

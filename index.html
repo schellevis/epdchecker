@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="refresh" content="600">
+  <title>EPD Status Monitor</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* --- Design tokens: dark mode (default) --- */
+    :root {
+      --bg:           #0f172a;
+      --surface:      #1e293b;
+      --border:       #334155;
+      --border-hr:    #1e293b;
+      --text:         #e2e8f0;
+      --text-muted:   #94a3b8;
+      --text-label:   #cbd5e1;
+      --accent:       #38bdf8;
+      --thumb-bg:     #0f172a;
+      --no-shot:      #475569;
+      --url-color:    #64748b;
+      --url-hover:    #94a3b8;
+      --hover-shadow: rgba(0,0,0,0.4);
+      --badge-ok-bg:      rgba(34,197,94,0.12);
+      --badge-ok-color:   #4ade80;
+      --badge-503-bg:     rgba(239,68,68,0.12);
+      --badge-503-color:  #f87171;
+      --badge-000-bg:     rgba(148,163,184,0.10);
+      --badge-000-color:  #94a3b8;
+      --badge-oth-bg:     rgba(251,191,36,0.12);
+      --badge-oth-color:  #fbbf24;
+      --pill-off-bg:      rgba(239,68,68,0.15);
+      --pill-off-color:   #f87171;
+      --pill-off-border:  rgba(239,68,68,0.3);
+      --pill-on-bg:       rgba(34,197,94,0.12);
+      --pill-on-color:    #4ade80;
+      --pill-on-border:   rgba(34,197,94,0.25);
+      --sec-off-color:    #f87171;
+      --sec-on-color:     #4ade80;
+      --card-off-border:  rgba(239,68,68,0.4);
+      --card-on-border:   rgba(34,197,94,0.25);
+      --lightbox-bg:      rgba(0,0,0,0.88);
+      --lightbox-caption: #cbd5e1;
+      --lightbox-close:   #94a3b8;
+      --lightbox-close-hover: #ffffff;
+    }
+
+    /* --- Light mode overrides --- */
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg:           #f1f5f9;
+        --surface:      #ffffff;
+        --border:       #e2e8f0;
+        --border-hr:    #e2e8f0;
+        --text:         #0f172a;
+        --text-muted:   #64748b;
+        --text-label:   #334155;
+        --accent:       #0284c7;
+        --thumb-bg:     #f8fafc;
+        --no-shot:      #94a3b8;
+        --url-color:    #94a3b8;
+        --url-hover:    #64748b;
+        --hover-shadow: rgba(0,0,0,0.12);
+        --badge-ok-bg:      rgba(22,163,74,0.10);
+        --badge-ok-color:   #15803d;
+        --badge-503-bg:     rgba(220,38,38,0.10);
+        --badge-503-color:  #b91c1c;
+        --badge-000-bg:     rgba(100,116,139,0.10);
+        --badge-000-color:  #475569;
+        --badge-oth-bg:     rgba(217,119,6,0.10);
+        --badge-oth-color:  #b45309;
+        --pill-off-bg:      rgba(220,38,38,0.08);
+        --pill-off-color:   #b91c1c;
+        --pill-off-border:  rgba(220,38,38,0.25);
+        --pill-on-bg:       rgba(22,163,74,0.08);
+        --pill-on-color:    #15803d;
+        --pill-on-border:   rgba(22,163,74,0.25);
+        --sec-off-color:    #b91c1c;
+        --sec-on-color:     #15803d;
+        --card-off-border:  rgba(220,38,38,0.35);
+        --card-on-border:   rgba(22,163,74,0.25);
+        --lightbox-bg:      rgba(0,0,0,0.75);
+        --lightbox-caption: #1e293b;
+        --lightbox-close:   #475569;
+        --lightbox-close-hover: #0f172a;
+      }
+    }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    header h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.02em; }
+    header h1 span { color: var(--accent); }
+    .meta { color: var(--text-muted); font-size: 0.8rem; line-height: 1.6; }
+    .meta strong { color: var(--text-label); }
+
+    .summary-bar {
+      display: flex;
+      gap: 12px;
+      padding: 16px 32px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .pill-offline { background: var(--pill-off-bg); color: var(--pill-off-color); border: 1px solid var(--pill-off-border); }
+    .pill-online  { background: var(--pill-on-bg);  color: var(--pill-on-color);  border: 1px solid var(--pill-on-border); }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+
+    main { padding: 28px 32px; max-width: 1600px; margin: 0 auto; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .section-header h2 { font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+    .section-header.offline h2 { color: var(--sec-off-color); }
+    .section-header.online  h2 { color: var(--sec-on-color); }
+    .section-header hr { flex: 1; border: none; border-top: 1px solid var(--border-hr); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 14px;
+      margin-bottom: 40px;
+    }
+
+    .card {
+      background: var(--surface);
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px var(--hover-shadow); }
+    .card.offline { border-color: var(--card-off-border); }
+    .card.online  { border-color: var(--card-on-border); }
+
+    .thumb {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      background: var(--thumb-bg);
+      overflow: hidden;
+    }
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top left;
+      cursor: zoom-in;
+      display: block;
+      transition: transform 0.3s;
+    }
+    .thumb img:hover { transform: scale(1.03); }
+    .no-screenshot {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      color: var(--no-shot);
+      font-size: 0.8rem;
+    }
+
+    .card-body { padding: 12px 14px 14px; }
+    .hospital-name { font-weight: 600; font-size: 0.9rem; line-height: 1.3; }
+    .hospital-url { margin-top: 3px; }
+    .hospital-url a {
+      color: var(--url-color);
+      font-size: 0.72rem;
+      text-decoration: none;
+      word-break: break-all;
+    }
+    .hospital-url a:hover { color: var(--url-hover); }
+
+    .badge {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .badge-ok       { background: var(--badge-ok-bg);  color: var(--badge-ok-color); }
+    .badge-err503   { background: var(--badge-503-bg); color: var(--badge-503-color); }
+    .badge-err000   { background: var(--badge-000-bg); color: var(--badge-000-color); }
+    .badge-errOther { background: var(--badge-oth-bg); color: var(--badge-oth-color); }
+
+    /* Lightbox */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--lightbox-bg);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 12px;
+      cursor: zoom-out;
+    }
+    #lightbox.active { display: flex; }
+    #lightbox img {
+      max-width: 92vw;
+      max-height: 85vh;
+      border-radius: 8px;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.6);
+      cursor: default;
+    }
+    #lightbox-caption {
+      color: var(--lightbox-caption);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    #lightbox-close {
+      position: absolute;
+      top: 16px; right: 20px;
+      font-size: 1.8rem;
+      color: var(--lightbox-close);
+      cursor: pointer;
+      line-height: 1;
+      background: none; border: none;
+    }
+    #lightbox-close:hover { color: var(--lightbox-close-hover); }
+
+    @media (max-width: 600px) {
+      header, main, .summary-bar { padding-left: 16px; padding-right: 16px; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>EPD Status <span>Monitor</span></h1>
+  <div class="meta">
+    <strong>Laatste check:</strong> 08-04-2026, 08:10:57<br>
+    <strong>Volgende check:</strong> ~08-04-2026, 08:20:57
+  </div>
+</header>
+
+<div class="summary-bar">
+  <span class="pill pill-offline"><span class="dot"></span>13 offline</span>
+  <span class="pill pill-online"><span class="dot"></span>57 online</span>
+  <span style="color:#475569;font-size:0.8rem">van 70 EPD-portalen</span>
+</div>
+
+<main>
+  
+  <div class="section-header offline">
+    <h2>Offline / niet bereikbaar</h2>
+    <hr>
+  </div>
+  <div class="grid">
+    <div class="card offline">
+      <div class="thumb"><img src="screenshots/mijn_adrz_nl.jpg" alt="Screenshot Admiraal De Ruyter Ziekenhuis" loading="lazy"
+            onclick="openLightbox(this.src,'Admiraal De Ruyter Ziekenhuis')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Admiraal De Ruyter Ziekenhuis</div>
+        <div class="hospital-url">
+          <a href="https://mijn.adrz.nl" target="_blank" rel="noopener">mijn.adrz.nl</a>
+        </div>
+        <span class="badge badge-err503">503 – Niet beschikbaar</span>
+      </div>
+    </div>
+    <div class="card offline">
+      <div class="thumb"><img src="screenshots/mijn_asz_nl.jpg" alt="Screenshot Albert Schweitzer Ziekenhuis" loading="lazy"
+            onclick="openLightbox(this.src,'Albert Schweitzer Ziekenhuis')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Albert Schweitzer Ziekenhuis</div>
+        <div class="hospital-url">
+          <a href="https://mijn.asz.nl" target="_blank" rel="noopener">mijn.asz.nl</a>
+        </div>
+        <span class="badge badge-err503">503 – Niet beschikbaar</span>
+      </div>
+    </div>
+    <div class="card offline">
+      <div class="thumb"><img src="screenshots/mijn_bernhoven_nl.jpg" alt="Screenshot Bernhoven" loading="lazy"
+            onclick="openLightbox(this.src,'Bernhoven')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Bernhoven</div>
+        <div class="hospital-url">
+          <a href="https://mijn.bernhoven.nl" target="_blank" rel="noopener">mijn.bernhoven.nl</a>
+        </div>
+        <span class="badge badge-err000">Geen verbinding</span>
+      </div>
+    </div>
+    <div class="card offline">
+      <div class="thumb"><img src="screenshots/mijn_bovenij_hix365_nl.jpg" alt="Screenshot Bovenij Ziekenhuis" loading="lazy"
+            onclick="openLightbox(this.src,'Bovenij Ziekenhuis')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Bovenij Ziekenhuis</div>
+        <div class="hospital-url">
+          <a href="https://mijn-bovenij.hix365.nl" target="_blank" rel="noopener">mijn-bovenij.hix365.nl</a>
+        </div>
+        <span class="badge badge-err503">503 – Niet beschikbaar</span>
+      </div>
+    </div>
+    <div class="card offline">
+      <div class="thumb"><img src="screenshots/mijnbravis_hix365_nl.jpg" alt="Screenshot Bravis Ziekenhuis" loading="lazy"
+            onclick="openLightbox(this.src,'Bravis Ziekenhuis')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Bravis Ziekenhuis</div>
+        <div class="hospital-url">
+          <a href="https://mijnbravis.hix365.nl" target="_blank" rel="noopener">mijnbravis.hix365.nl</a>
+        </div>
+        <span class="badge badge-err503">503 – Niet beschikbaar</span>
+      </div>
+    </div>
+    <div class="card offline">
+      <div class="thumb"><img src="screenshots/mijn_dijklander_nl.jpg" alt="Screenshot Dijklander Ziekenhuis" loading="lazy"
+            onclick="openLightbox(this.src,'Dijklander Ziekenhuis')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Dijklander Ziekenhuis</div>
+        <div class="hospital-url">
+          <a href="https://mijn.dijklander.nl" target="_blank" rel="noopener">mijn.dijklander.nl</a>
+        </div>
+        <span class="badge badge-err503">503 – Niet beschikbaar</span>
+      </div>
+    </div>
+    <div class="card offline">
+      <div class="thumb"><img src="screenshots/mijn_ijsselland_hix365_nl.jpg" alt="Screenshot IJsselland Ziekenhuis" loading="lazy"
+            onclick="openLightbox(this.src,'IJsselland Ziekenhuis')"></div>
+      <div class="card-body">
+        <div class="hospital-name">IJsselland Ziekenhuis</div>
+        <div class="hospital-url">
+          <a href="https://mijn-ijsselland.hix365.nl" target="_blank" rel="noopener">mijn-ijsselland.hix365.nl</a>
+        </div>
+        <span class="badge badge-err000">Geen verbinding</span>
+      </div>
+    </div>
+    <div class="card offline">
+      <div class="thumb"><img src="screenshots/mijn_lzr_nl.jpg" alt="Screenshot Langeland Ziekenhuis" loading="lazy"
+            onclick="openLightbox(this.src,'Langeland Ziekenhuis')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Langeland Ziekenhuis</div>
+        <div class="hospital-url">
+          <a href="https://mijn.lzr.nl" target="_blank" rel="noopener">mijn.lzr.nl</a>
+        </div>
+        <span class="badge badge-err503">503 – Niet beschikbaar</span>
+      </div>
+    </div>
+    <div class="card offline">
+      <div class="thumb"><img src="screenshots/mijn_meandermc_nl.jpg" alt="Screenshot Meander Medisch Centrum" loading="lazy"
+            onclick="openLightbox(this.src,'Meander Medisch Centrum')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Meander Medisch Centrum</div>
+        <div class="hospital-url">
+          <a href="https://mijn.meandermc.nl" target="_blank" rel="noopener">mijn.meandermc.nl</a>
+        </div>
+        <span class="badge badge-err503">503 – Niet beschikbaar</span>
+      </div>
+    </div>
+    <div class="card offline">
+      <div class="thumb"><div class="no-screenshot">Geen screenshot beschikbaar</div></div>
+      <div class="card-body">
+        <div class="hospital-name">Nij Smellinghe</div>
+        <div class="hospital-url">
+          <a href="https://patientportaal.mijnnijsmellinghe.nl" target="_blank" rel="noopener">patientportaal.mijnnijsmellinghe.nl</a>
+        </div>
+        <span class="badge badge-err000">Geen verbinding</span>
+      </div>
+    </div>
+    <div class="card offline">
+      <div class="thumb"><img src="screenshots/mijn_saxenburgh_nl.jpg" alt="Screenshot Saxenburgh Groep" loading="lazy"
+            onclick="openLightbox(this.src,'Saxenburgh Groep')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Saxenburgh Groep</div>
+        <div class="hospital-url">
+          <a href="https://mijn.saxenburgh.nl" target="_blank" rel="noopener">mijn.saxenburgh.nl</a>
+        </div>
+        <span class="badge badge-err503">503 – Niet beschikbaar</span>
+      </div>
+    </div>
+    <div class="card offline">
+      <div class="thumb"><img src="screenshots/mijn_sjgweert_nl.jpg" alt="Screenshot St. Jans Gasthuis Weert" loading="lazy"
+            onclick="openLightbox(this.src,'St. Jans Gasthuis Weert')"></div>
+      <div class="card-body">
+        <div class="hospital-name">St. Jans Gasthuis Weert</div>
+        <div class="hospital-url">
+          <a href="https://mijn.sjgweert.nl" target="_blank" rel="noopener">mijn.sjgweert.nl</a>
+        </div>
+        <span class="badge badge-err503">503 – Niet beschikbaar</span>
+      </div>
+    </div>
+    <div class="card offline">
+      <div class="thumb"><img src="screenshots/mijn_tergooi_nl.jpg" alt="Screenshot Tergooi MC" loading="lazy"
+            onclick="openLightbox(this.src,'Tergooi MC')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Tergooi MC</div>
+        <div class="hospital-url">
+          <a href="https://mijn.tergooi.nl" target="_blank" rel="noopener">mijn.tergooi.nl</a>
+        </div>
+        <span class="badge badge-err503">503 – Niet beschikbaar</span>
+      </div>
+    </div></div>
+  
+
+  <div class="section-header online">
+    <h2>Online</h2>
+    <hr>
+  </div>
+  <div class="grid">
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijn_alrijne_nl.jpg" alt="Screenshot Alrijne Ziekenhuis" loading="lazy"
+            onclick="openLightbox(this.src,'Alrijne Ziekenhuis')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Alrijne Ziekenhuis</div>
+        <div class="hospital-url">
+          <a href="https://mijn.alrijne.nl" target="_blank" rel="noopener">mijn.alrijne.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijn_amphia_nl.jpg" alt="Screenshot Amphia Ziekenhuis" loading="lazy"
+            onclick="openLightbox(this.src,'Amphia Ziekenhuis')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Amphia Ziekenhuis</div>
+        <div class="hospital-url">
+          <a href="https://mijn.amphia.nl" target="_blank" rel="noopener">mijn.amphia.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijndossier_amsterdamumc_nl.jpg" alt="Screenshot Amsterdam UMC" loading="lazy"
+            onclick="openLightbox(this.src,'Amsterdam UMC')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Amsterdam UMC</div>
+        <div class="hospital-url">
+          <a href="https://mijndossier.amsterdamumc.nl" target="_blank" rel="noopener">mijndossier.amsterdamumc.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijn_catharinaziekenhuis_nl.jpg" alt="Screenshot Catharina Ziekenhuis" loading="lazy"
+            onclick="openLightbox(this.src,'Catharina Ziekenhuis')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Catharina Ziekenhuis</div>
+        <div class="hospital-url">
+          <a href="https://mijn.catharinaziekenhuis.nl" target="_blank" rel="noopener">mijn.catharinaziekenhuis.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijn_dz_nl.jpg" alt="Screenshot Deventer Ziekenhuis" loading="lazy"
+            onclick="openLightbox(this.src,'Deventer Ziekenhuis')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Deventer Ziekenhuis</div>
+        <div class="hospital-url">
+          <a href="https://mijn.dz.nl" target="_blank" rel="noopener">mijn.dz.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijn_diakonessenhuis_hix365_nl.jpg" alt="Screenshot Diakonessenhuis Utrecht" loading="lazy"
+            onclick="openLightbox(this.src,'Diakonessenhuis Utrecht')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Diakonessenhuis Utrecht</div>
+        <div class="hospital-url">
+          <a href="https://mijn-diakonessenhuis.hix365.nl" target="_blank" rel="noopener">mijn-diakonessenhuis.hix365.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijn_elkerliek_nl.jpg" alt="Screenshot Elkerliek Ziekenhuis" loading="lazy"
+            onclick="openLightbox(this.src,'Elkerliek Ziekenhuis')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Elkerliek Ziekenhuis</div>
+        <div class="hospital-url">
+          <a href="https://mijn.elkerliek.nl" target="_blank" rel="noopener">mijn.elkerliek.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/pp_erasmusmc_nl.jpg" alt="Screenshot Erasmus MC" loading="lazy"
+            onclick="openLightbox(this.src,'Erasmus MC')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Erasmus MC</div>
+        <div class="hospital-url">
+          <a href="https://pp.erasmusmc.nl" target="_blank" rel="noopener">pp.erasmusmc.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/www_mijnetz_nl.jpg" alt="Screenshot ETZ (Elisabeth-TweeSteden Ziekenhuis)" loading="lazy"
+            onclick="openLightbox(this.src,'ETZ (Elisabeth-TweeSteden Ziekenhuis)')"></div>
+      <div class="card-body">
+        <div class="hospital-name">ETZ (Elisabeth-TweeSteden Ziekenhuis)</div>
+        <div class="hospital-url">
+          <a href="https://www.mijnetz.nl" target="_blank" rel="noopener">www.mijnetz.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijnflevoziekenhuis_hix365_nl.jpg" alt="Screenshot Flevoziekenhuis" loading="lazy"
+            onclick="openLightbox(this.src,'Flevoziekenhuis')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Flevoziekenhuis</div>
+        <div class="hospital-url">
+          <a href="https://mijnflevoziekenhuis.hix365.nl" target="_blank" rel="noopener">mijnflevoziekenhuis.hix365.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijn_franciscus_nl.jpg" alt="Screenshot Franciscus Gasthuis & Vlietland" loading="lazy"
+            onclick="openLightbox(this.src,'Franciscus Gasthuis & Vlietland')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Franciscus Gasthuis & Vlietland</div>
+        <div class="hospital-url">
+          <a href="https://mijn.franciscus.nl" target="_blank" rel="noopener">mijn.franciscus.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijn_gelreziekenhuizen_nl.jpg" alt="Screenshot Gelre Ziekenhuizen" loading="lazy"
+            onclick="openLightbox(this.src,'Gelre Ziekenhuizen')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Gelre Ziekenhuizen</div>
+        <div class="hospital-url">
+          <a href="https://mijn.gelreziekenhuizen.nl" target="_blank" rel="noopener">mijn.gelreziekenhuizen.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/www_mijnghz_nl.jpg" alt="Screenshot Groene Hart Ziekenhuis" loading="lazy"
+            onclick="openLightbox(this.src,'Groene Hart Ziekenhuis')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Groene Hart Ziekenhuis</div>
+        <div class="hospital-url">
+          <a href="https://www.mijnghz.nl" target="_blank" rel="noopener">www.mijnghz.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijn_haaglandenmc_nl.jpg" alt="Screenshot Haaglanden Medisch Centrum" loading="lazy"
+            onclick="openLightbox(this.src,'Haaglanden Medisch Centrum')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Haaglanden Medisch Centrum</div>
+        <div class="hospital-url">
+          <a href="https://mijn.haaglandenmc.nl" target="_blank" rel="noopener">mijn.haaglandenmc.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijn_hagaziekenhuis_nl.jpg" alt="Screenshot HagaZiekenhuis" loading="lazy"
+            onclick="openLightbox(this.src,'HagaZiekenhuis')"></div>
+      <div class="card-body">
+        <div class="hospital-name">HagaZiekenhuis</div>
+        <div class="hospital-url">
+          <a href="https://mijn.hagaziekenhuis.nl" target="_blank" rel="noopener">mijn.hagaziekenhuis.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijn_ikazia_nl.jpg" alt="Screenshot Ikazia Ziekenhuis" loading="lazy"
+            onclick="openLightbox(this.src,'Ikazia Ziekenhuis')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Ikazia Ziekenhuis</div>
+        <div class="hospital-url">
+          <a href="https://mijn.ikazia.nl" target="_blank" rel="noopener">mijn.ikazia.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijnisala_nl.jpg" alt="Screenshot Isala" loading="lazy"
+            onclick="openLightbox(this.src,'Isala')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Isala</div>
+        <div class="hospital-url">
+          <a href="https://mijnisala.nl" target="_blank" rel="noopener">mijnisala.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijn_jbz_nl.jpg" alt="Screenshot Jeroen Bosch Ziekenhuis" loading="lazy"
+            onclick="openLightbox(this.src,'Jeroen Bosch Ziekenhuis')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Jeroen Bosch Ziekenhuis</div>
+        <div class="hospital-url">
+          <a href="https://mijn.jbz.nl" target="_blank" rel="noopener">mijn.jbz.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijn_lumc_nl.jpg" alt="Screenshot Leids Universitair Medisch Centrum" loading="lazy"
+            onclick="openLightbox(this.src,'Leids Universitair Medisch Centrum')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Leids Universitair Medisch Centrum</div>
+        <div class="hospital-url">
+          <a href="https://mijn.lumc.nl" target="_blank" rel="noopener">mijn.lumc.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijn_maasstadziekenhuis_nl.jpg" alt="Screenshot Maasstad Ziekenhuis" loading="lazy"
+            onclick="openLightbox(this.src,'Maasstad Ziekenhuis')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Maasstad Ziekenhuis</div>
+        <div class="hospital-url">
+          <a href="https://mijn.maasstadziekenhuis.nl" target="_blank" rel="noopener">mijn.maasstadziekenhuis.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijn_mumc_nl.jpg" alt="Screenshot Maastricht UMC+" loading="lazy"
+            onclick="openLightbox(this.src,'Maastricht UMC+')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Maastricht UMC+</div>
+        <div class="hospital-url">
+          <a href="https://mijn.mumc.nl" target="_blank" rel="noopener">mijn.mumc.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijn_mzh_nl.jpg" alt="Screenshot Martini Ziekenhuis" loading="lazy"
+            onclick="openLightbox(this.src,'Martini Ziekenhuis')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Martini Ziekenhuis</div>
+        <div class="hospital-url">
+          <a href="https://mijn.mzh.nl" target="_blank" rel="noopener">mijn.mzh.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijn_mmc_nl.jpg" alt="Screenshot Máxima MC" loading="lazy"
+            onclick="openLightbox(this.src,'Máxima MC')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Máxima MC</div>
+        <div class="hospital-url">
+          <a href="https://mijn.mmc.nl" target="_blank" rel="noopener">mijn.mmc.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/www_mijnmcl_nl.jpg" alt="Screenshot Medisch Centrum Leeuwarden" loading="lazy"
+            onclick="openLightbox(this.src,'Medisch Centrum Leeuwarden')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Medisch Centrum Leeuwarden</div>
+        <div class="hospital-url">
+          <a href="https://www.mijnmcl.nl" target="_blank" rel="noopener">www.mijnmcl.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijn_mst_nl.jpg" alt="Screenshot Medisch Spectrum Twente" loading="lazy"
+            onclick="openLightbox(this.src,'Medisch Spectrum Twente')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Medisch Spectrum Twente</div>
+        <div class="hospital-url">
+          <a href="https://mijn.mst.nl" target="_blank" rel="noopener">mijn.mst.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/www_mijngezondheid_net.jpg" alt="Screenshot MijnGezondheid.net" loading="lazy"
+            onclick="openLightbox(this.src,'MijnGezondheid.net')"></div>
+      <div class="card-body">
+        <div class="hospital-name">MijnGezondheid.net</div>
+        <div class="hospital-url">
+          <a href="https://www.mijngezondheid.net" target="_blank" rel="noopener">www.mijngezondheid.net</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijnnoordwest_nl.jpg" alt="Screenshot Noordwest Ziekenhuisgroep" loading="lazy"
+            onclick="openLightbox(this.src,'Noordwest Ziekenhuisgroep')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Noordwest Ziekenhuisgroep</div>
+        <div class="hospital-url">
+          <a href="https://mijnnoordwest.nl" target="_blank" rel="noopener">mijnnoordwest.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijnolvg_nl.jpg" alt="Screenshot OLVG" loading="lazy"
+            onclick="openLightbox(this.src,'OLVG')"></div>
+      <div class="card-body">
+        <div class="hospital-name">OLVG</div>
+        <div class="hospital-url">
+          <a href="https://mijnolvg.nl" target="_blank" rel="noopener">mijnolvg.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/www_ommelanderziekenhuis_nl.jpg" alt="Screenshot Ommelander Ziekenhuis Groningen" loading="lazy"
+            onclick="openLightbox(this.src,'Ommelander Ziekenhuis Groningen')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Ommelander Ziekenhuis Groningen</div>
+        <div class="hospital-url">
+          <a href="https://www.ommelanderziekenhuis.nl" target="_blank" rel="noopener">www.ommelanderziekenhuis.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/www_mijnpantein_nl.jpg" alt="Screenshot Pantein" loading="lazy"
+            onclick="openLightbox(this.src,'Pantein')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Pantein</div>
+        <div class="hospital-url">
+          <a href="https://www.mijnpantein.nl" target="_blank" rel="noopener">www.mijnpantein.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/www_praktijkportal_nl.jpg" alt="Screenshot PraktijkPortal" loading="lazy"
+            onclick="openLightbox(this.src,'PraktijkPortal')"></div>
+      <div class="card-body">
+        <div class="hospital-name">PraktijkPortal</div>
+        <div class="hospital-url">
+          <a href="https://www.praktijkportal.nl" target="_blank" rel="noopener">www.praktijkportal.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijnradboud_radboudumc_nl.jpg" alt="Screenshot Radboud UMC" loading="lazy"
+            onclick="openLightbox(this.src,'Radboud UMC')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Radboud UMC</div>
+        <div class="hospital-url">
+          <a href="https://mijnradboud.radboudumc.nl" target="_blank" rel="noopener">mijnradboud.radboudumc.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijn_reinierdegraaf_nl.jpg" alt="Screenshot Reinier de Graaf" loading="lazy"
+            onclick="openLightbox(this.src,'Reinier de Graaf')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Reinier de Graaf</div>
+        <div class="hospital-url">
+          <a href="https://mijn.reinierdegraaf.nl" target="_blank" rel="noopener">mijn.reinierdegraaf.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijn_rijnstate_nl.jpg" alt="Screenshot Rijnstate" loading="lazy"
+            onclick="openLightbox(this.src,'Rijnstate')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Rijnstate</div>
+        <div class="hospital-url">
+          <a href="https://mijn.rijnstate.nl" target="_blank" rel="noopener">mijn.rijnstate.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/client_rivas_nl.jpg" alt="Screenshot Rivas Zorggroep" loading="lazy"
+            onclick="openLightbox(this.src,'Rivas Zorggroep')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Rivas Zorggroep</div>
+        <div class="hospital-url">
+          <a href="https://client.rivas.nl" target="_blank" rel="noopener">client.rivas.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijn_rkz_nl.jpg" alt="Screenshot Rode Kruis Ziekenhuis" loading="lazy"
+            onclick="openLightbox(this.src,'Rode Kruis Ziekenhuis')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Rode Kruis Ziekenhuis</div>
+        <div class="hospital-url">
+          <a href="https://mijn.rkz.nl" target="_blank" rel="noopener">mijn.rkz.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijn_slingeland_nl.jpg" alt="Screenshot Slingeland Ziekenhuis" loading="lazy"
+            onclick="openLightbox(this.src,'Slingeland Ziekenhuis')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Slingeland Ziekenhuis</div>
+        <div class="hospital-url">
+          <a href="https://mijn.slingeland.nl" target="_blank" rel="noopener">mijn.slingeland.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/www_mijnspaarnegasthuis_nl.jpg" alt="Screenshot Spaarne Gasthuis" loading="lazy"
+            onclick="openLightbox(this.src,'Spaarne Gasthuis')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Spaarne Gasthuis</div>
+        <div class="hospital-url">
+          <a href="https://www.mijnspaarnegasthuis.nl" target="_blank" rel="noopener">www.mijnspaarnegasthuis.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijn_spijkenissemc_nl.jpg" alt="Screenshot Spijkenisse Medisch Centrum" loading="lazy"
+            onclick="openLightbox(this.src,'Spijkenisse Medisch Centrum')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Spijkenisse Medisch Centrum</div>
+        <div class="hospital-url">
+          <a href="https://mijn.spijkenissemc.nl" target="_blank" rel="noopener">mijn.spijkenissemc.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijnantonius_antoniusziekenhuis_nl.jpg" alt="Screenshot St. Antonius Ziekenhuis" loading="lazy"
+            onclick="openLightbox(this.src,'St. Antonius Ziekenhuis')"></div>
+      <div class="card-body">
+        <div class="hospital-name">St. Antonius Ziekenhuis</div>
+        <div class="hospital-url">
+          <a href="https://mijnantonius.antoniusziekenhuis.nl" target="_blank" rel="noopener">mijnantonius.antoniusziekenhuis.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/patient_mijnantonius_nl.jpg" alt="Screenshot St. Antonius Ziekenhuis (portaal 2)" loading="lazy"
+            onclick="openLightbox(this.src,'St. Antonius Ziekenhuis (portaal 2)')"></div>
+      <div class="card-body">
+        <div class="hospital-name">St. Antonius Ziekenhuis (portaal 2)</div>
+        <div class="hospital-url">
+          <a href="https://patient.mijnantonius.nl" target="_blank" rel="noopener">patient.mijnantonius.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijn_stjansdal_nl.jpg" alt="Screenshot St. Jansdal" loading="lazy"
+            onclick="openLightbox(this.src,'St. Jansdal')"></div>
+      <div class="card-body">
+        <div class="hospital-name">St. Jansdal</div>
+        <div class="hospital-url">
+          <a href="https://mijn.stjansdal.nl" target="_blank" rel="noopener">mijn.stjansdal.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijnskb_skbwinterswijk_nl.jpg" alt="Screenshot Streekziekenhuis Koningin Beatrix" loading="lazy"
+            onclick="openLightbox(this.src,'Streekziekenhuis Koningin Beatrix')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Streekziekenhuis Koningin Beatrix</div>
+        <div class="hospital-url">
+          <a href="https://mijnskb.skbwinterswijk.nl" target="_blank" rel="noopener">mijnskb.skbwinterswijk.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/portaal_mijntjongerschans_nl.jpg" alt="Screenshot Tjongerschans" loading="lazy"
+            onclick="openLightbox(this.src,'Tjongerschans')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Tjongerschans</div>
+        <div class="hospital-url">
+          <a href="https://portaal.mijntjongerschans.nl" target="_blank" rel="noopener">portaal.mijntjongerschans.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/www_mijntreant_nl.jpg" alt="Screenshot Treant Zorggroep" loading="lazy"
+            onclick="openLightbox(this.src,'Treant Zorggroep')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Treant Zorggroep</div>
+        <div class="hospital-url">
+          <a href="https://www.mijntreant.nl" target="_blank" rel="noopener">www.mijntreant.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/zorgpp_umcutrecht_nl.jpg" alt="Screenshot UMC Utrecht" loading="lazy"
+            onclick="openLightbox(this.src,'UMC Utrecht')"></div>
+      <div class="card-body">
+        <div class="hospital-name">UMC Utrecht</div>
+        <div class="hospital-url">
+          <a href="https://zorgpp.umcutrecht.nl" target="_blank" rel="noopener">zorgpp.umcutrecht.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijn_umcg_nl.jpg" alt="Screenshot UMCG" loading="lazy"
+            onclick="openLightbox(this.src,'UMCG')"></div>
+      <div class="card-body">
+        <div class="hospital-name">UMCG</div>
+        <div class="hospital-url">
+          <a href="https://mijn.umcg.nl" target="_blank" rel="noopener">mijn.umcg.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijn_vanweelbethesda_nl.jpg" alt="Screenshot Van Weel-Bethesda Ziekenhuis" loading="lazy"
+            onclick="openLightbox(this.src,'Van Weel-Bethesda Ziekenhuis')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Van Weel-Bethesda Ziekenhuis</div>
+        <div class="hospital-url">
+          <a href="https://mijn.vanweelbethesda.nl" target="_blank" rel="noopener">mijn.vanweelbethesda.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijnviecuri_viecuri_nl.jpg" alt="Screenshot VieCuri Medisch Centrum" loading="lazy"
+            onclick="openLightbox(this.src,'VieCuri Medisch Centrum')"></div>
+      <div class="card-body">
+        <div class="hospital-name">VieCuri Medisch Centrum</div>
+        <div class="hospital-url">
+          <a href="https://mijnviecuri.viecuri.nl" target="_blank" rel="noopener">mijnviecuri.viecuri.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijn_wza_nl.jpg" alt="Screenshot Wilhelmina Ziekenhuis Assen" loading="lazy"
+            onclick="openLightbox(this.src,'Wilhelmina Ziekenhuis Assen')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Wilhelmina Ziekenhuis Assen</div>
+        <div class="hospital-url">
+          <a href="https://mijn.wza.nl" target="_blank" rel="noopener">mijn.wza.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijn_zmc_nl.jpg" alt="Screenshot Zaans Medisch Centrum" loading="lazy"
+            onclick="openLightbox(this.src,'Zaans Medisch Centrum')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Zaans Medisch Centrum</div>
+        <div class="hospital-url">
+          <a href="https://mijn.zmc.nl" target="_blank" rel="noopener">mijn.zmc.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijnzha_ziekenhuisamstelland_nl.jpg" alt="Screenshot Ziekenhuis Amstelland" loading="lazy"
+            onclick="openLightbox(this.src,'Ziekenhuis Amstelland')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Ziekenhuis Amstelland</div>
+        <div class="hospital-url">
+          <a href="https://mijnzha.ziekenhuisamstelland.nl" target="_blank" rel="noopener">mijnzha.ziekenhuisamstelland.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/www_geldersevallei_nl.jpg" alt="Screenshot Ziekenhuis Gelderse Vallei" loading="lazy"
+            onclick="openLightbox(this.src,'Ziekenhuis Gelderse Vallei')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Ziekenhuis Gelderse Vallei</div>
+        <div class="hospital-url">
+          <a href="https://www.geldersevallei.nl" target="_blank" rel="noopener">www.geldersevallei.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijn_ziekenhuisrivierenland_nl.jpg" alt="Screenshot Ziekenhuis Rivierenland" loading="lazy"
+            onclick="openLightbox(this.src,'Ziekenhuis Rivierenland')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Ziekenhuis Rivierenland</div>
+        <div class="hospital-url">
+          <a href="https://mijn.ziekenhuisrivierenland.nl" target="_blank" rel="noopener">mijn.ziekenhuisrivierenland.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijn_zgt_nl.jpg" alt="Screenshot Ziekenhuisgroep Twente" loading="lazy"
+            onclick="openLightbox(this.src,'Ziekenhuisgroep Twente')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Ziekenhuisgroep Twente</div>
+        <div class="hospital-url">
+          <a href="https://mijn.zgt.nl" target="_blank" rel="noopener">mijn.zgt.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/patient_zorgsaam_org.jpg" alt="Screenshot Zorgsaam Zeeuws-Vlaanderen" loading="lazy"
+            onclick="openLightbox(this.src,'Zorgsaam Zeeuws-Vlaanderen')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Zorgsaam Zeeuws-Vlaanderen</div>
+        <div class="hospital-url">
+          <a href="https://patient.zorgsaam.org" target="_blank" rel="noopener">patient.zorgsaam.org</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div>
+    <div class="card online">
+      <div class="thumb"><img src="screenshots/mijn_zuyderland_nl.jpg" alt="Screenshot Zuyderland Medisch Centrum" loading="lazy"
+            onclick="openLightbox(this.src,'Zuyderland Medisch Centrum')"></div>
+      <div class="card-body">
+        <div class="hospital-name">Zuyderland Medisch Centrum</div>
+        <div class="hospital-url">
+          <a href="https://mijn.zuyderland.nl" target="_blank" rel="noopener">mijn.zuyderland.nl</a>
+        </div>
+        <span class="badge badge-ok">Online</span>
+      </div>
+    </div></div>
+</main>
+
+<div id="lightbox" onclick="closeLightbox()">
+  <button id="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="">
+  <div id="lightbox-caption"></div>
+</div>
+
+<script>
+  function openLightbox(src, caption) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox-caption').textContent = caption;
+    document.getElementById('lightbox').classList.add('active');
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
+</body>
+</html>
