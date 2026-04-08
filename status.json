@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-04-08T10:10:13.648Z",
+  "checkedAt": "2026-04-08T10:32:58.392Z",
   "results": [
     {
       "domain": "mijn.adrz.nl",
@@ -11,7 +11,7 @@
         "20.86.217.65"
       ],
       "isHix365": true,
-      "screenshotPath": null
+      "screenshotPath": "screenshots/mijn_adrz_nl.jpg"
     },
     {
       "domain": "mijn-bovenij.hix365.nl",
@@ -41,13 +41,13 @@
       "domain": "mijn-diakonessenhuis.hix365.nl",
       "name": "Diakonessenhuis Utrecht",
       "url": "https://mijn-diakonessenhuis.hix365.nl",
-      "status": 0,
+      "status": 503,
       "ok": false,
       "resolvedAddresses": [
         "20.86.217.65"
       ],
       "isHix365": true,
-      "screenshotPath": null
+      "screenshotPath": "screenshots/mijn_diakonessenhuis_hix365_nl.jpg"
     },
     {
       "domain": "mijn.dijklander.nl",
