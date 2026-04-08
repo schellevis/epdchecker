@@ -14,6 +14,8 @@ const HTTP_TIMEOUT = 12000;
 const NAV_TIMEOUT = 20000;
 
 fs.mkdirSync(SCREENSHOTS_DIR, { recursive: true });
+// Prevent GitHub Pages from running Jekyll
+fs.writeFileSync(path.join(DIST_DIR, '.nojekyll'), '');
 
 async function checkHttp(url) {
   const controller = new AbortController();
