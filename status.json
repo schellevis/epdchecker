@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-04-08T08:27:34.588Z",
+  "checkedAt": "2026-04-08T08:45:11.618Z",
   "results": [
     {
       "domain": "mijn.adrz.nl",
@@ -53,13 +53,13 @@
       "domain": "mijn.dijklander.nl",
       "name": "Dijklander Ziekenhuis",
       "url": "https://mijn.dijklander.nl",
-      "status": 0,
+      "status": 503,
       "ok": false,
       "resolvedAddresses": [
         "20.86.217.65"
       ],
       "isHix365": true,
-      "screenshotPath": null
+      "screenshotPath": "screenshots/mijn_dijklander_nl.jpg"
     },
     {
       "domain": "mijn-ijsselland.hix365.nl",
@@ -113,25 +113,25 @@
       "domain": "mijn.saxenburgh.nl",
       "name": "Saxenburgh Groep",
       "url": "https://mijn.saxenburgh.nl",
-      "status": 503,
+      "status": 0,
       "ok": false,
       "resolvedAddresses": [
         "20.126.244.23"
       ],
       "isHix365": false,
-      "screenshotPath": "screenshots/mijn_saxenburgh_nl.jpg"
+      "screenshotPath": null
     },
     {
       "domain": "mijn.sjgweert.nl",
       "name": "St. Jans Gasthuis Weert",
       "url": "https://mijn.sjgweert.nl",
-      "status": 0,
+      "status": 503,
       "ok": false,
       "resolvedAddresses": [
         "20.86.217.65"
       ],
       "isHix365": true,
-      "screenshotPath": null
+      "screenshotPath": "screenshots/mijn_sjgweert_nl.jpg"
     },
     {
       "domain": "mijn.tergooi.nl",
@@ -144,6 +144,18 @@
       ],
       "isHix365": true,
       "screenshotPath": "screenshots/mijn_tergooi_nl.jpg"
+    },
+    {
+      "domain": "www.geldersevallei.nl",
+      "name": "Ziekenhuis Gelderse Vallei",
+      "url": "https://www.geldersevallei.nl",
+      "status": 0,
+      "ok": false,
+      "resolvedAddresses": [
+        "213.160.249.173"
+      ],
+      "isHix365": false,
+      "screenshotPath": "screenshots/www_geldersevallei_nl.jpg"
     },
     {
       "domain": "mijn.asz.nl",
@@ -584,8 +596,8 @@
       "status": 200,
       "ok": true,
       "resolvedAddresses": [
-        "104.18.24.131",
-        "104.18.25.131"
+        "104.18.25.131",
+        "104.18.24.131"
       ],
       "isHix365": false,
       "screenshotPath": "screenshots/mijn_rkz_nl.jpg"
@@ -781,18 +793,6 @@
       ],
       "isHix365": false,
       "screenshotPath": "screenshots/mijnzha_ziekenhuisamstelland_nl.jpg"
-    },
-    {
-      "domain": "www.geldersevallei.nl",
-      "name": "Ziekenhuis Gelderse Vallei",
-      "url": "https://www.geldersevallei.nl",
-      "status": 200,
-      "ok": true,
-      "resolvedAddresses": [
-        "213.160.249.173"
-      ],
-      "isHix365": false,
-      "screenshotPath": "screenshots/www_geldersevallei_nl.jpg"
     },
     {
       "domain": "mijn.ziekenhuisrivierenland.nl",
