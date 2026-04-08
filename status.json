@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-04-08T09:00:55.707Z",
+  "checkedAt": "2026-04-08T09:17:45.073Z",
   "results": [
     {
       "domain": "mijn.adrz.nl",
@@ -11,19 +11,19 @@
         "20.86.217.65"
       ],
       "isHix365": true,
-      "screenshotPath": null
+      "screenshotPath": "screenshots/mijn_adrz_nl.jpg"
     },
     {
       "domain": "mijn-bovenij.hix365.nl",
       "name": "Bovenij Ziekenhuis",
       "url": "https://mijn-bovenij.hix365.nl",
-      "status": 0,
+      "status": 503,
       "ok": false,
       "resolvedAddresses": [
         "20.86.217.65"
       ],
       "isHix365": true,
-      "screenshotPath": null
+      "screenshotPath": "screenshots/mijn_bovenij_hix365_nl.jpg"
     },
     {
       "domain": "mijnbravis.hix365.nl",
@@ -65,18 +65,6 @@
       "domain": "mijn-ijsselland.hix365.nl",
       "name": "IJsselland Ziekenhuis",
       "url": "https://mijn-ijsselland.hix365.nl",
-      "status": 503,
-      "ok": false,
-      "resolvedAddresses": [
-        "20.86.217.65"
-      ],
-      "isHix365": true,
-      "screenshotPath": "screenshots/mijn_ijsselland_hix365_nl.jpg"
-    },
-    {
-      "domain": "mijn.lzr.nl",
-      "name": "Langeland Ziekenhuis",
-      "url": "https://mijn.lzr.nl",
       "status": 0,
       "ok": false,
       "resolvedAddresses": [
@@ -84,6 +72,18 @@
       ],
       "isHix365": true,
       "screenshotPath": null
+    },
+    {
+      "domain": "mijn.lzr.nl",
+      "name": "Langeland Ziekenhuis",
+      "url": "https://mijn.lzr.nl",
+      "status": 503,
+      "ok": false,
+      "resolvedAddresses": [
+        "20.86.217.65"
+      ],
+      "isHix365": true,
+      "screenshotPath": "screenshots/mijn_lzr_nl.jpg"
     },
     {
       "domain": "mijn.meandermc.nl",
@@ -144,18 +144,6 @@
       ],
       "isHix365": true,
       "screenshotPath": "screenshots/mijn_tergooi_nl.jpg"
-    },
-    {
-      "domain": "portaal.mijntjongerschans.nl",
-      "name": "Tjongerschans",
-      "url": "https://portaal.mijntjongerschans.nl",
-      "status": 0,
-      "ok": false,
-      "resolvedAddresses": [
-        "83.136.192.155"
-      ],
-      "isHix365": false,
-      "screenshotPath": null
     },
     {
       "domain": "mijn.asz.nl",
@@ -596,8 +584,8 @@
       "status": 200,
       "ok": true,
       "resolvedAddresses": [
-        "104.18.25.131",
-        "104.18.24.131"
+        "104.18.24.131",
+        "104.18.25.131"
       ],
       "isHix365": false,
       "screenshotPath": "screenshots/mijn_rkz_nl.jpg"
@@ -685,6 +673,18 @@
       ],
       "isHix365": false,
       "screenshotPath": "screenshots/mijnskb_skbwinterswijk_nl.jpg"
+    },
+    {
+      "domain": "portaal.mijntjongerschans.nl",
+      "name": "Tjongerschans",
+      "url": "https://portaal.mijntjongerschans.nl",
+      "status": 200,
+      "ok": true,
+      "resolvedAddresses": [
+        "83.136.192.155"
+      ],
+      "isHix365": false,
+      "screenshotPath": "screenshots/portaal_mijntjongerschans_nl.jpg"
     },
     {
       "domain": "www.mijntreant.nl",
