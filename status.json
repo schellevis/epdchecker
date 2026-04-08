@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-04-08T08:45:11.618Z",
+  "checkedAt": "2026-04-08T08:56:46.632Z",
   "results": [
     {
       "domain": "mijn.adrz.nl",
@@ -11,7 +11,7 @@
         "20.86.217.65"
       ],
       "isHix365": true,
-      "screenshotPath": "screenshots/mijn_adrz_nl.jpg"
+      "screenshotPath": null
     },
     {
       "domain": "mijn-bovenij.hix365.nl",
@@ -23,7 +23,7 @@
         "20.86.217.65"
       ],
       "isHix365": true,
-      "screenshotPath": "screenshots/mijn_bovenij_hix365_nl.jpg"
+      "screenshotPath": null
     },
     {
       "domain": "mijnbravis.hix365.nl",
@@ -35,7 +35,7 @@
         "20.86.217.65"
       ],
       "isHix365": true,
-      "screenshotPath": "screenshots/mijnbravis_hix365_nl.jpg"
+      "screenshotPath": null
     },
     {
       "domain": "mijn-diakonessenhuis.hix365.nl",
@@ -47,7 +47,7 @@
         "20.86.217.65"
       ],
       "isHix365": true,
-      "screenshotPath": "screenshots/mijn_diakonessenhuis_hix365_nl.jpg"
+      "screenshotPath": null
     },
     {
       "domain": "mijn.dijklander.nl",
@@ -59,7 +59,7 @@
         "20.86.217.65"
       ],
       "isHix365": true,
-      "screenshotPath": "screenshots/mijn_dijklander_nl.jpg"
+      "screenshotPath": null
     },
     {
       "domain": "mijn-ijsselland.hix365.nl",
@@ -71,7 +71,7 @@
         "20.86.217.65"
       ],
       "isHix365": true,
-      "screenshotPath": "screenshots/mijn_ijsselland_hix365_nl.jpg"
+      "screenshotPath": null
     },
     {
       "domain": "mijn.lzr.nl",
@@ -83,7 +83,7 @@
         "20.86.217.65"
       ],
       "isHix365": true,
-      "screenshotPath": "screenshots/mijn_lzr_nl.jpg"
+      "screenshotPath": null
     },
     {
       "domain": "mijn.meandermc.nl",
@@ -95,7 +95,7 @@
         "20.86.217.65"
       ],
       "isHix365": true,
-      "screenshotPath": "screenshots/mijn_meandermc_nl.jpg"
+      "screenshotPath": null
     },
     {
       "domain": "patientportaal.mijnnijsmellinghe.nl",
@@ -113,7 +113,7 @@
       "domain": "mijn.saxenburgh.nl",
       "name": "Saxenburgh Groep",
       "url": "https://mijn.saxenburgh.nl",
-      "status": 0,
+      "status": 503,
       "ok": false,
       "resolvedAddresses": [
         "20.126.244.23"
@@ -131,7 +131,7 @@
         "20.86.217.65"
       ],
       "isHix365": true,
-      "screenshotPath": "screenshots/mijn_sjgweert_nl.jpg"
+      "screenshotPath": null
     },
     {
       "domain": "mijn.tergooi.nl",
@@ -143,19 +143,7 @@
         "20.86.217.65"
       ],
       "isHix365": true,
-      "screenshotPath": "screenshots/mijn_tergooi_nl.jpg"
-    },
-    {
-      "domain": "www.geldersevallei.nl",
-      "name": "Ziekenhuis Gelderse Vallei",
-      "url": "https://www.geldersevallei.nl",
-      "status": 0,
-      "ok": false,
-      "resolvedAddresses": [
-        "213.160.249.173"
-      ],
-      "isHix365": false,
-      "screenshotPath": "screenshots/www_geldersevallei_nl.jpg"
+      "screenshotPath": null
     },
     {
       "domain": "mijn.asz.nl",
@@ -793,6 +781,18 @@
       ],
       "isHix365": false,
       "screenshotPath": "screenshots/mijnzha_ziekenhuisamstelland_nl.jpg"
+    },
+    {
+      "domain": "www.geldersevallei.nl",
+      "name": "Ziekenhuis Gelderse Vallei",
+      "url": "https://www.geldersevallei.nl",
+      "status": 200,
+      "ok": true,
+      "resolvedAddresses": [
+        "213.160.249.173"
+      ],
+      "isHix365": false,
+      "screenshotPath": "screenshots/www_geldersevallei_nl.jpg"
     },
     {
       "domain": "mijn.ziekenhuisrivierenland.nl",
