@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-04-09T06:54:16.253Z",
+  "checkedAt": "2026-04-09T14:10:40.516Z",
   "results": [
     {
       "domain": "mijn.adrz.nl",
@@ -185,13 +185,13 @@
       "domain": "mijn.saxenburgh.nl",
       "name": "Saxenburgh Groep",
       "url": "https://mijn.saxenburgh.nl",
-      "status": 0,
+      "status": 503,
       "ok": false,
       "resolvedAddresses": [
         "20.126.244.23"
       ],
       "isHix365": false,
-      "screenshotPath": null
+      "screenshotPath": "screenshots/mijn_saxenburgh_nl.jpg"
     },
     {
       "domain": "mijn.sjgweert.nl",
@@ -227,6 +227,18 @@
         "20.86.217.65"
       ],
       "isHix365": true,
+      "screenshotPath": null
+    },
+    {
+      "domain": "mijnzha.ziekenhuisamstelland.nl",
+      "name": "Ziekenhuis Amstelland",
+      "url": "https://mijnzha.ziekenhuisamstelland.nl",
+      "status": 0,
+      "ok": false,
+      "resolvedAddresses": [
+        "145.117.213.99"
+      ],
+      "isHix365": false,
       "screenshotPath": null
     },
     {
@@ -492,7 +504,7 @@
         "194.13.165.7"
       ],
       "isHix365": false,
-      "screenshotPath": "screenshots/www_mijngezondheid_net.jpg"
+      "screenshotPath": null
     },
     {
       "domain": "mijnnoordwest.nl",
@@ -771,18 +783,6 @@
       ],
       "isHix365": false,
       "screenshotPath": "screenshots/mijn_wza_nl.jpg"
-    },
-    {
-      "domain": "mijnzha.ziekenhuisamstelland.nl",
-      "name": "Ziekenhuis Amstelland",
-      "url": "https://mijnzha.ziekenhuisamstelland.nl",
-      "status": 200,
-      "ok": true,
-      "resolvedAddresses": [
-        "145.117.213.99"
-      ],
-      "isHix365": false,
-      "screenshotPath": "screenshots/mijnzha_ziekenhuisamstelland_nl.jpg"
     },
     {
       "domain": "www.geldersevallei.nl",
