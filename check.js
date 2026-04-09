@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 'use strict';
 
-const { chromium } = require('playwright');
+let chromium;
+try { chromium = require('playwright').chromium; } catch { chromium = null; }
 const dns = require('node:dns').promises;
 const fs = require('fs');
 const path = require('path');
@@ -36,6 +37,7 @@ async function checkHttp(url) {
 }
 
 async function takeScreenshot(browser, url, filename) {
+  if (!browser) return false;
   const context = await browser.newContext({
     viewport: { width: 1280, height: 800 },
     ignoreHTTPSErrors: true,
@@ -85,7 +87,8 @@ async function runWithConcurrency(items, fn, limit) {
 }
 
 async function main() {
-  const browser = await chromium.launch({ args: ['--no-sandbox'] });
+  const browser = chromium ? await chromium.launch({ args: ['--no-sandbox'] }) : null;
+  if (!chromium) console.log('Playwright niet beschikbaar – screenshots worden overgeslagen.');
   const checkedAt = new Date();
 
   console.log(`Checking ${hospitals.length} hospitals with concurrency ${CONCURRENCY}...`);
@@ -115,7 +118,7 @@ async function main() {
     };
   }, CONCURRENCY);
 
-  await browser.close();
+  if (browser) await browser.close();
 
   // Sort: offline first, then alphabetically by name within each group
   results.sort((a, b) => {
