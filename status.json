@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-04-10T08:09:05.483Z",
+  "checkedAt": "2026-04-10T09:35:49.611Z",
   "results": [
     {
       "domain": "mijn.adrz.nl",
@@ -24,6 +24,16 @@
       ],
       "isHix365": true,
       "screenshotPath": null
+    },
+    {
+      "domain": "patientportaal.mijnantonius.nl",
+      "name": "Antonius Zorggroep (Sneek)",
+      "url": "https://patientportaal.mijnantonius.nl",
+      "status": 0,
+      "ok": false,
+      "resolvedAddresses": [],
+      "isHix365": false,
+      "screenshotPath": "screenshots/patientportaal_mijnantonius_nl.jpg"
     },
     {
       "domain": "mijn.bernhoven.nl",
@@ -135,7 +145,7 @@
     },
     {
       "domain": "mijn.lzr.nl",
-      "name": "Langeland Ziekenhuis",
+      "name": "Laurentius Ziekenhuis Roermond",
       "url": "https://mijn.lzr.nl",
       "status": 0,
       "ok": false,
