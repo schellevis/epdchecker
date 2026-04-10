@@ -11,10 +11,12 @@ const hospitals = require('./hospitals.json');
 
 const DIST_DIR = path.join(__dirname, 'dist');
 const SCREENSHOTS_DIR = path.join(DIST_DIR, 'screenshots');
+const HISTORY_FILE = path.join(DIST_DIR, 'history.json');
 const CONCURRENCY = 5;
 const HTTP_TIMEOUT = 12000;
 const NAV_TIMEOUT = 20000;
 const HIX365_IP = '20.86.217.65';
+const RECOVERY_WINDOW_MS = 48 * 60 * 60 * 1000; // show "eerder offline" for 48 hours after recovery
 
 fs.mkdirSync(SCREENSHOTS_DIR, { recursive: true });
 // Prevent GitHub Pages from running Jekyll
@@ -126,10 +128,44 @@ async function main() {
     return a.name.localeCompare(b.name, 'nl');
   });
 
-  const html = generateHtml(results, checkedAt);
+  // Load history
+  let history = { offlineHistory: {} };
+  try { history = JSON.parse(fs.readFileSync(HISTORY_FILE, 'utf8')); } catch {}
+  if (!history.offlineHistory) history.offlineHistory = {};
+
+  // Update history with current results
+  for (const r of results) {
+    const entry = history.offlineHistory[r.domain];
+    if (!r.ok) {
+      // Site is offline — upsert entry
+      if (!entry) {
+        history.offlineHistory[r.domain] = {
+          name: r.name,
+          firstSeen: checkedAt.toISOString(),
+          outageStart: checkedAt.toISOString(),
+          lastSeen: checkedAt.toISOString(),
+          count: 1,
+        };
+      } else {
+        history.offlineHistory[r.domain].lastSeen = checkedAt.toISOString();
+        history.offlineHistory[r.domain].count = (entry.count || 0) + 1;
+        // Site went offline again after recovery — start a fresh outage window
+        if (entry.recoveredAt) {
+          history.offlineHistory[r.domain].outageStart = checkedAt.toISOString();
+          delete history.offlineHistory[r.domain].recoveredAt;
+        }
+      }
+    } else if (entry && !entry.recoveredAt) {
+      // Site just came back online — record recovery time
+      history.offlineHistory[r.domain].recoveredAt = checkedAt.toISOString();
+    }
+  }
+
+  fs.writeFileSync(HISTORY_FILE, JSON.stringify(history, null, 2), 'utf8');
+
+  const html = generateHtml(results, checkedAt, history);
   fs.writeFileSync(path.join(DIST_DIR, 'index.html'), html, 'utf8');
 
-  // Write a JSON summary for potential future use
   fs.writeFileSync(
     path.join(DIST_DIR, 'status.json'),
     JSON.stringify({ checkedAt: checkedAt.toISOString(), results }, null, 2),
@@ -182,15 +218,68 @@ function card(h, cacheKey) {
     </div>`;
 }
 
-function generateHtml(results, checkedAt) {
+function formatDuration(ms) {
+  if (ms < 60 * 60 * 1000) return `${Math.round(ms / 60000)} min`;
+  if (ms < 24 * 60 * 60 * 1000) return `${Math.round(ms / 3600000)} uur`;
+  const days = Math.floor(ms / (24 * 3600000));
+  const hours = Math.round((ms % (24 * 3600000)) / 3600000);
+  return hours > 0 ? `${days}d ${hours}u` : `${days} dag${days !== 1 ? 'en' : ''}`;
+}
+
+function recoveredCard(h, cacheKey, histEntry) {
+  const outageStart = new Date(histEntry.outageStart || histEntry.firstSeen);
+  const recoveredAt = new Date(histEntry.recoveredAt);
+  const durationMs = recoveredAt - outageStart;
+  const extraBadges = h.isHix365 ? `<span class="badge badge-tag">hix365</span>` : '';
+  const imgHtml = h.screenshotPath
+    ? `<img src="${h.screenshotPath}?v=${cacheKey}" alt="Screenshot ${h.name}" loading="lazy"
+            onclick="openLightbox(this.src,'${h.name.replace(/'/g, "\\'")}')">`
+    : `<div class="no-screenshot">Geen screenshot beschikbaar</div>`;
+
+  return `
+    <div class="card recovered">
+      <div class="thumb">${imgHtml}</div>
+      <div class="card-body">
+        <div class="hospital-name">${h.name}</div>
+        <div class="hospital-url">
+          <a href="${h.url}" target="_blank" rel="noopener">${h.domain}</a>
+        </div>
+        <div class="badge-row">
+          <span class="badge badge-ok">Online</span>
+          ${extraBadges}
+        </div>
+        <div class="outage-info">
+          Offline: ${formatTimestamp(outageStart)} – ${formatTimestamp(recoveredAt)}
+          <span class="outage-duration">${formatDuration(durationMs)}</span>
+        </div>
+      </div>
+    </div>`;
+}
+
+function generateHtml(results, checkedAt, history) {
   const offline = results.filter(r => !r.ok);
   const online  = results.filter(r =>  r.ok);
   const hix365Offline = offline.filter(r => r.isHix365);
   const hix365Online = online.filter(r => r.isHix365);
   const cacheKey = checkedAt.getTime();
 
-  const offlineCards = offline.map(h => card(h, cacheKey)).join('');
-  const onlineCards  = online.map(h => card(h, cacheKey)).join('');
+  // Sites that recovered within the last 48h
+  const now = checkedAt.getTime();
+  const recovered = online
+    .filter(r => {
+      const e = history.offlineHistory[r.domain];
+      return e && e.recoveredAt && (now - new Date(e.recoveredAt).getTime()) < RECOVERY_WINDOW_MS;
+    })
+    .map(r => ({ ...r, _history: history.offlineHistory[r.domain] }))
+    .sort((a, b) => new Date(b._history.recoveredAt) - new Date(a._history.recoveredAt));
+
+  // Exclude recovered sites from the main online grid (they're shown in their own section)
+  const recoveredDomains = new Set(recovered.map(r => r.domain));
+  const onlineOnly = online.filter(r => !recoveredDomains.has(r.domain));
+
+  const offlineCards   = offline.map(h => card(h, cacheKey)).join('');
+  const recoveredCards = recovered.map(h => recoveredCard(h, cacheKey, h._history)).join('');
+  const onlineCards    = onlineOnly.map(h => card(h, cacheKey)).join('');
 
   return `<!DOCTYPE html>
 <html lang="nl">
@@ -233,8 +322,10 @@ function generateHtml(results, checkedAt) {
       --pill-on-border:   rgba(34,197,94,0.25);
       --sec-off-color:    #f87171;
       --sec-on-color:     #4ade80;
+      --sec-rec-color:    #fbbf24;
       --card-off-border:  rgba(239,68,68,0.4);
       --card-on-border:   rgba(34,197,94,0.25);
+      --card-rec-border:  rgba(251,191,36,0.35);
       --lightbox-bg:      rgba(0,0,0,0.88);
       --lightbox-caption: #cbd5e1;
       --lightbox-close:   #94a3b8;
@@ -273,8 +364,10 @@ function generateHtml(results, checkedAt) {
         --pill-on-border:   rgba(22,163,74,0.25);
         --sec-off-color:    #b91c1c;
         --sec-on-color:     #15803d;
+        --sec-rec-color:    #d97706;
         --card-off-border:  rgba(220,38,38,0.35);
         --card-on-border:   rgba(22,163,74,0.25);
+        --card-rec-border:  rgba(217,119,6,0.35);
         --lightbox-bg:      rgba(0,0,0,0.75);
         --lightbox-caption: #1e293b;
         --lightbox-close:   #475569;
@@ -306,24 +399,43 @@ function generateHtml(results, checkedAt) {
 
     .summary-bar {
       display: flex;
-      gap: 12px;
-      padding: 16px 32px;
+      gap: 16px;
+      padding: 12px 32px;
       background: var(--bg);
       border-bottom: 1px solid var(--border);
       align-items: center;
       flex-wrap: wrap;
     }
+    .pill-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .pill-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .pill-divider {
+      width: 1px;
+      height: 22px;
+      background: var(--border);
+      flex-shrink: 0;
+    }
     .pill {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 5px 14px;
+      padding: 4px 12px;
       border-radius: 9999px;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: 600;
     }
-    .pill-offline { background: var(--pill-off-bg); color: var(--pill-off-color); border: 1px solid var(--pill-off-border); }
-    .pill-online  { background: var(--pill-on-bg);  color: var(--pill-on-color);  border: 1px solid var(--pill-on-border); }
+    .pill-offline   { background: var(--pill-off-bg); color: var(--pill-off-color); border: 1px solid var(--pill-off-border); }
+    .pill-online    { background: var(--pill-on-bg);  color: var(--pill-on-color);  border: 1px solid var(--pill-on-border); }
+    .pill-recovered { background: rgba(251,191,36,0.12); color: var(--sec-rec-color); border: 1px solid rgba(251,191,36,0.3); }
     .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
 
     main { padding: 28px 32px; max-width: 1600px; margin: 0 auto; }
@@ -335,8 +447,9 @@ function generateHtml(results, checkedAt) {
       margin-bottom: 16px;
     }
     .section-header h2 { font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
-    .section-header.offline h2 { color: var(--sec-off-color); }
-    .section-header.online  h2 { color: var(--sec-on-color); }
+    .section-header.offline   h2 { color: var(--sec-off-color); }
+    .section-header.online    h2 { color: var(--sec-on-color); }
+    .section-header.recovered h2 { color: var(--sec-rec-color); }
     .section-header hr { flex: 1; border: none; border-top: 1px solid var(--border-hr); }
 
     .grid {
@@ -354,8 +467,25 @@ function generateHtml(results, checkedAt) {
       transition: box-shadow 0.2s, transform 0.2s;
     }
     .card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px var(--hover-shadow); }
-    .card.offline { border-color: var(--card-off-border); }
-    .card.online  { border-color: var(--card-on-border); }
+    .card.offline   { border-color: var(--card-off-border); }
+    .card.online    { border-color: var(--card-on-border); }
+    .card.recovered { border-color: var(--card-rec-border); }
+    .outage-info {
+      margin-top: 8px;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .outage-duration {
+      display: inline-block;
+      margin-left: 4px;
+      padding: 1px 6px;
+      background: rgba(251,191,36,0.12);
+      color: var(--sec-rec-color);
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
 
     .thumb {
       position: relative;
@@ -468,11 +598,19 @@ function generateHtml(results, checkedAt) {
 </header>
 
 <div class="summary-bar">
-  <span class="pill pill-offline"><span class="dot"></span>${offline.length} offline</span>
-  <span class="pill pill-online"><span class="dot"></span>${online.length} online</span>
-  <span class="pill pill-offline"><span class="dot"></span>${hix365Offline.length} hix365 offline</span>
-  <span class="pill pill-online"><span class="dot"></span>${hix365Online.length} hix365 online</span>
-  <span style="color:#475569;font-size:0.8rem">van ${results.length} EPD-portalen</span>
+  <div class="pill-group">
+    <span class="pill-label">Totaal</span>
+    <span class="pill pill-offline"><span class="dot"></span>${offline.length} offline</span>
+    <span class="pill pill-online"><span class="dot"></span>${online.length} online</span>
+    ${recovered.length > 0 ? `<span class="pill pill-recovered"><span class="dot"></span>${recovered.length} hersteld</span>` : ''}
+  </div>
+  <div class="pill-divider"></div>
+  <div class="pill-group">
+    <span class="pill-label">HIX365</span>
+    <span class="pill pill-offline"><span class="dot"></span>${hix365Offline.length} offline</span>
+    <span class="pill pill-online"><span class="dot"></span>${hix365Online.length} online</span>
+  </div>
+  <span style="color:var(--text-muted);font-size:0.8rem;margin-left:auto">van ${results.length} EPD-portalen</span>
 </div>
 
 <main>
@@ -482,6 +620,14 @@ function generateHtml(results, checkedAt) {
     <hr>
   </div>
   <div class="grid">${offlineCards}</div>
+  ` : ''}
+
+  ${recovered.length > 0 ? `
+  <div class="section-header recovered">
+    <h2>Eerder offline — hersteld</h2>
+    <hr>
+  </div>
+  <div class="grid">${recoveredCards}</div>
   ` : ''}
 
   <div class="section-header online">
