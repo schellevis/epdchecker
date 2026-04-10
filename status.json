@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-04-10T03:24:31.122Z",
+  "checkedAt": "2026-04-10T08:09:05.483Z",
   "results": [
     {
       "domain": "mijn.adrz.nl",
@@ -197,13 +197,13 @@
       "domain": "mijn.saxenburgh.nl",
       "name": "Saxenburgh Groep",
       "url": "https://mijn.saxenburgh.nl",
-      "status": 0,
+      "status": 503,
       "ok": false,
       "resolvedAddresses": [
         "20.126.244.23"
       ],
       "isHix365": false,
-      "screenshotPath": null
+      "screenshotPath": "screenshots/mijn_saxenburgh_nl.jpg"
     },
     {
       "domain": "mijn.sjgweert.nl",
@@ -230,18 +230,6 @@
       "screenshotPath": null
     },
     {
-      "domain": "mijn.vanweelbethesda.nl",
-      "name": "Van Weel-Bethesda Ziekenhuis",
-      "url": "https://mijn.vanweelbethesda.nl",
-      "status": 500,
-      "ok": false,
-      "resolvedAddresses": [
-        "20.126.244.23"
-      ],
-      "isHix365": false,
-      "screenshotPath": "screenshots/mijn_vanweelbethesda_nl.jpg"
-    },
-    {
       "domain": "mijn.zmc.nl",
       "name": "Zaans Medisch Centrum",
       "url": "https://mijn.zmc.nl",
@@ -252,18 +240,6 @@
       ],
       "isHix365": true,
       "screenshotPath": null
-    },
-    {
-      "domain": "www.geldersevallei.nl",
-      "name": "Ziekenhuis Gelderse Vallei",
-      "url": "https://www.geldersevallei.nl",
-      "status": 500,
-      "ok": false,
-      "resolvedAddresses": [
-        "213.160.249.173"
-      ],
-      "isHix365": false,
-      "screenshotPath": "screenshots/www_geldersevallei_nl.jpg"
     },
     {
       "domain": "mijn.alrijne.nl",
@@ -512,8 +488,8 @@
       "status": 200,
       "ok": true,
       "resolvedAddresses": [
-        "2001:67c:1134:2104::11",
-        "194.13.164.21"
+        "194.13.164.21",
+        "2001:67c:1134:2104::11"
       ],
       "isHix365": false,
       "screenshotPath": "screenshots/mijn_mst_nl.jpg"
@@ -633,9 +609,9 @@
       "status": 200,
       "ok": true,
       "resolvedAddresses": [
-        "2606:4700::6812:1883",
+        "104.18.25.131",
         "2606:4700::6812:1983",
-        "104.18.25.131"
+        "2606:4700::6812:1883"
       ],
       "isHix365": false,
       "screenshotPath": "screenshots/mijn_rkz_nl.jpg"
@@ -773,6 +749,18 @@
       "screenshotPath": "screenshots/mijn_umcg_nl.jpg"
     },
     {
+      "domain": "mijn.vanweelbethesda.nl",
+      "name": "Van Weel-Bethesda Ziekenhuis",
+      "url": "https://mijn.vanweelbethesda.nl",
+      "status": 200,
+      "ok": true,
+      "resolvedAddresses": [
+        "20.126.244.23"
+      ],
+      "isHix365": false,
+      "screenshotPath": "screenshots/mijn_vanweelbethesda_nl.jpg"
+    },
+    {
       "domain": "mijnviecuri.viecuri.nl",
       "name": "VieCuri Medisch Centrum",
       "url": "https://mijnviecuri.viecuri.nl",
@@ -807,6 +795,18 @@
       ],
       "isHix365": false,
       "screenshotPath": "screenshots/mijnzha_ziekenhuisamstelland_nl.jpg"
+    },
+    {
+      "domain": "www.geldersevallei.nl",
+      "name": "Ziekenhuis Gelderse Vallei",
+      "url": "https://www.geldersevallei.nl",
+      "status": 200,
+      "ok": true,
+      "resolvedAddresses": [
+        "213.160.249.173"
+      ],
+      "isHix365": false,
+      "screenshotPath": "screenshots/www_geldersevallei_nl.jpg"
     },
     {
       "domain": "mijn.ziekenhuisrivierenland.nl",
