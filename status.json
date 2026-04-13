@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-04-11T12:52:12.055Z",
+  "checkedAt": "2026-04-13T03:34:48.661Z",
   "results": [
     {
       "domain": "mijn.adrz.nl",
@@ -449,7 +449,9 @@
       "url": "https://mijn.maasstadziekenhuis.nl",
       "status": 200,
       "ok": true,
-      "resolvedAddresses": [],
+      "resolvedAddresses": [
+        "20.126.244.23"
+      ],
       "isHix365": false,
       "screenshotPath": "screenshots/mijn_maasstadziekenhuis_nl.jpg"
     },
@@ -617,8 +619,9 @@
       "status": 200,
       "ok": true,
       "resolvedAddresses": [
-        "2606:4700::6812:1983",
         "2606:4700::6812:1883",
+        "2606:4700::6812:1983",
+        "104.18.24.131",
         "104.18.25.131"
       ],
       "isHix365": false,
