@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-04-13T03:34:48.661Z",
+  "checkedAt": "2026-04-14T08:23:33.319Z",
   "results": [
     {
       "domain": "mijn.adrz.nl",
@@ -72,18 +72,6 @@
       "screenshotPath": null
     },
     {
-      "domain": "mijn.cwz.nl",
-      "name": "Canisius Wilhelmina Ziekenhuis",
-      "url": "https://mijn.cwz.nl",
-      "status": 0,
-      "ok": false,
-      "resolvedAddresses": [
-        "20.86.217.65"
-      ],
-      "isHix365": true,
-      "screenshotPath": null
-    },
-    {
       "domain": "mijn-diakonessenhuis.hix365.nl",
       "name": "Diakonessenhuis Utrecht",
       "url": "https://mijn-diakonessenhuis.hix365.nl",
@@ -147,18 +135,6 @@
       "domain": "mijn.lzr.nl",
       "name": "Laurentius Ziekenhuis Roermond",
       "url": "https://mijn.lzr.nl",
-      "status": 0,
-      "ok": false,
-      "resolvedAddresses": [
-        "20.86.217.65"
-      ],
-      "isHix365": true,
-      "screenshotPath": null
-    },
-    {
-      "domain": "mijn.mzh.nl",
-      "name": "Martini Ziekenhuis",
-      "url": "https://mijn.mzh.nl",
       "status": 0,
       "ok": false,
       "resolvedAddresses": [
@@ -286,6 +262,20 @@
       ],
       "isHix365": false,
       "screenshotPath": "screenshots/mijndossier_amsterdamumc_nl.jpg"
+    },
+    {
+      "domain": "mijn.cwz.nl",
+      "name": "Canisius Wilhelmina Ziekenhuis",
+      "url": "https://mijn.cwz.nl",
+      "status": 200,
+      "ok": true,
+      "resolvedAddresses": [
+        "104.20.39.216",
+        "2606:4700:10::6814:27d8",
+        "2606:4700:10::ac42:9989"
+      ],
+      "isHix365": false,
+      "screenshotPath": "screenshots/mijn_cwz_nl.jpg"
     },
     {
       "domain": "mijn.catharinaziekenhuis.nl",
@@ -468,6 +458,18 @@
       "screenshotPath": "screenshots/mijn_mumc_nl.jpg"
     },
     {
+      "domain": "mijn.mzh.nl",
+      "name": "Martini Ziekenhuis",
+      "url": "https://mijn.mzh.nl",
+      "status": 200,
+      "ok": true,
+      "resolvedAddresses": [
+        "193.177.163.233"
+      ],
+      "isHix365": false,
+      "screenshotPath": "screenshots/mijn_mzh_nl.jpg"
+    },
+    {
       "domain": "mijn.mmc.nl",
       "name": "Máxima MC",
       "url": "https://mijn.mmc.nl",
@@ -498,8 +500,8 @@
       "status": 200,
       "ok": true,
       "resolvedAddresses": [
-        "2001:67c:1134:2104::11",
-        "194.13.164.21"
+        "194.13.164.21",
+        "2001:67c:1134:2104::11"
       ],
       "isHix365": false,
       "screenshotPath": "screenshots/mijn_mst_nl.jpg"
@@ -619,10 +621,9 @@
       "status": 200,
       "ok": true,
       "resolvedAddresses": [
+        "104.18.25.131",
         "2606:4700::6812:1883",
-        "2606:4700::6812:1983",
-        "104.18.24.131",
-        "104.18.25.131"
+        "2606:4700::6812:1983"
       ],
       "isHix365": false,
       "screenshotPath": "screenshots/mijn_rkz_nl.jpg"
