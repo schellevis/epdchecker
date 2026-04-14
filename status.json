@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-04-14T08:23:33.319Z",
+  "checkedAt": "2026-04-14T18:36:43.092Z",
   "results": [
     {
       "domain": "mijn.adrz.nl",
@@ -270,9 +270,9 @@
       "status": 200,
       "ok": true,
       "resolvedAddresses": [
-        "104.20.39.216",
+        "2606:4700:10::ac42:9989",
         "2606:4700:10::6814:27d8",
-        "2606:4700:10::ac42:9989"
+        "104.20.39.216"
       ],
       "isHix365": false,
       "screenshotPath": "screenshots/mijn_cwz_nl.jpg"
@@ -500,8 +500,8 @@
       "status": 200,
       "ok": true,
       "resolvedAddresses": [
-        "194.13.164.21",
-        "2001:67c:1134:2104::11"
+        "2001:67c:1134:2104::11",
+        "194.13.164.21"
       ],
       "isHix365": false,
       "screenshotPath": "screenshots/mijn_mst_nl.jpg"
@@ -621,9 +621,9 @@
       "status": 200,
       "ok": true,
       "resolvedAddresses": [
-        "104.18.25.131",
         "2606:4700::6812:1883",
-        "2606:4700::6812:1983"
+        "2606:4700::6812:1983",
+        "104.18.25.131"
       ],
       "isHix365": false,
       "screenshotPath": "screenshots/mijn_rkz_nl.jpg"

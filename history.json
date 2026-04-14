@@ -3,99 +3,99 @@
     "mijn-bovenij.hix365.nl": {
       "name": "Bovenij Ziekenhuis",
       "firstSeen": "2026-04-08T06:00:00.000Z",
-      "lastSeen": "2026-04-14T08:23:33.319Z",
-      "count": 20,
+      "lastSeen": "2026-04-14T18:36:43.092Z",
+      "count": 21,
       "outageStart": "2026-04-08T06:00:00.000Z"
     },
     "mijnbravis.hix365.nl": {
       "name": "Bravis Ziekenhuis",
       "firstSeen": "2026-04-08T06:00:00.000Z",
-      "lastSeen": "2026-04-14T08:23:33.319Z",
-      "count": 20,
+      "lastSeen": "2026-04-14T18:36:43.092Z",
+      "count": 21,
       "outageStart": "2026-04-08T06:00:00.000Z"
     },
     "mijn.meandermc.nl": {
       "name": "Meander Medisch Centrum",
       "firstSeen": "2026-04-08T06:00:00.000Z",
-      "lastSeen": "2026-04-14T08:23:33.319Z",
-      "count": 20,
+      "lastSeen": "2026-04-14T18:36:43.092Z",
+      "count": 21,
       "outageStart": "2026-04-08T06:00:00.000Z"
     },
     "mijn.dijklander.nl": {
       "name": "Dijklander Ziekenhuis",
       "firstSeen": "2026-04-08T06:00:00.000Z",
-      "lastSeen": "2026-04-14T08:23:33.319Z",
-      "count": 20,
+      "lastSeen": "2026-04-14T18:36:43.092Z",
+      "count": 21,
       "outageStart": "2026-04-08T06:00:00.000Z"
     },
     "mijn.asz.nl": {
       "name": "Albert Schweitzer Ziekenhuis",
       "firstSeen": "2026-04-08T06:00:00.000Z",
-      "lastSeen": "2026-04-14T08:23:33.319Z",
-      "count": 11,
+      "lastSeen": "2026-04-14T18:36:43.092Z",
+      "count": 12,
       "outageStart": "2026-04-08T06:00:00.000Z"
     },
     "mijn-ijsselland.hix365.nl": {
       "name": "IJsselland Ziekenhuis",
       "firstSeen": "2026-04-08T06:00:00.000Z",
-      "lastSeen": "2026-04-14T08:23:33.319Z",
-      "count": 20,
+      "lastSeen": "2026-04-14T18:36:43.092Z",
+      "count": 21,
       "outageStart": "2026-04-08T06:00:00.000Z"
     },
     "mijn.adrz.nl": {
       "name": "Admiraal De Ruyter Ziekenhuis",
       "firstSeen": "2026-04-08T06:00:00.000Z",
-      "lastSeen": "2026-04-14T08:23:33.319Z",
-      "count": 20,
+      "lastSeen": "2026-04-14T18:36:43.092Z",
+      "count": 21,
       "outageStart": "2026-04-08T06:00:00.000Z"
     },
     "mijn.saxenburgh.nl": {
       "name": "Saxenburgh Groep",
       "firstSeen": "2026-04-08T06:00:00.000Z",
-      "lastSeen": "2026-04-14T08:23:33.319Z",
-      "count": 20,
+      "lastSeen": "2026-04-14T18:36:43.092Z",
+      "count": 21,
       "outageStart": "2026-04-08T06:00:00.000Z"
     },
     "mijn-diakonessenhuis.hix365.nl": {
       "name": "Diakonessenhuis Utrecht",
       "firstSeen": "2026-04-08T06:00:00.000Z",
-      "lastSeen": "2026-04-14T08:23:33.319Z",
-      "count": 19,
+      "lastSeen": "2026-04-14T18:36:43.092Z",
+      "count": 20,
       "outageStart": "2026-04-08T06:00:00.000Z"
     },
     "mijn.tergooi.nl": {
       "name": "Tergooi MC",
       "firstSeen": "2026-04-08T06:00:00.000Z",
-      "lastSeen": "2026-04-14T08:23:33.319Z",
-      "count": 20,
+      "lastSeen": "2026-04-14T18:36:43.092Z",
+      "count": 21,
       "outageStart": "2026-04-08T06:00:00.000Z"
     },
     "mijn.lzr.nl": {
       "name": "Langeland Ziekenhuis",
       "firstSeen": "2026-04-08T08:27:34.588Z",
-      "lastSeen": "2026-04-14T08:23:33.319Z",
-      "count": 19,
+      "lastSeen": "2026-04-14T18:36:43.092Z",
+      "count": 20,
       "outageStart": "2026-04-08T08:27:34.588Z"
     },
     "mijn.sjgweert.nl": {
       "name": "St. Jans Gasthuis Weert",
       "firstSeen": "2026-04-08T08:27:34.588Z",
-      "lastSeen": "2026-04-14T08:23:33.319Z",
-      "count": 19,
+      "lastSeen": "2026-04-14T18:36:43.092Z",
+      "count": 20,
       "outageStart": "2026-04-08T08:27:34.588Z"
     },
     "mijn.bernhoven.nl": {
       "name": "Bernhoven",
       "firstSeen": "2026-04-08T08:27:34.588Z",
-      "lastSeen": "2026-04-14T08:23:33.319Z",
-      "count": 10,
+      "lastSeen": "2026-04-14T18:36:43.092Z",
+      "count": 11,
       "outageStart": "2026-04-08T08:27:34.588Z"
     },
     "patientportaal.mijnnijsmellinghe.nl": {
       "name": "Nij Smellinghe",
       "firstSeen": "2026-04-08T08:27:34.588Z",
-      "lastSeen": "2026-04-14T08:23:33.319Z",
-      "count": 19,
+      "lastSeen": "2026-04-14T18:36:43.092Z",
+      "count": 20,
       "outageStart": "2026-04-08T08:27:34.588Z"
     },
     "www.geldersevallei.nl": {
@@ -117,15 +117,15 @@
     "mijnflevoziekenhuis.hix365.nl": {
       "name": "Flevoziekenhuis",
       "firstSeen": "2026-04-09T06:54:16.253Z",
-      "lastSeen": "2026-04-14T08:23:33.319Z",
-      "count": 9,
+      "lastSeen": "2026-04-14T18:36:43.092Z",
+      "count": 10,
       "outageStart": "2026-04-09T06:54:16.253Z"
     },
     "mijn.franciscus.nl": {
       "name": "Franciscus Gasthuis & Vlietland",
       "firstSeen": "2026-04-09T06:54:16.253Z",
-      "lastSeen": "2026-04-14T08:23:33.319Z",
-      "count": 9,
+      "lastSeen": "2026-04-14T18:36:43.092Z",
+      "count": 10,
       "outageStart": "2026-04-09T06:54:16.253Z"
     },
     "mijn.mzh.nl": {
@@ -139,15 +139,15 @@
     "client.rivas.nl": {
       "name": "Rivas Zorggroep",
       "firstSeen": "2026-04-09T06:54:16.253Z",
-      "lastSeen": "2026-04-14T08:23:33.319Z",
-      "count": 9,
+      "lastSeen": "2026-04-14T18:36:43.092Z",
+      "count": 10,
       "outageStart": "2026-04-09T06:54:16.253Z"
     },
     "mijn.zmc.nl": {
       "name": "Zaans Medisch Centrum",
       "firstSeen": "2026-04-09T06:54:16.253Z",
-      "lastSeen": "2026-04-14T08:23:33.319Z",
-      "count": 9,
+      "lastSeen": "2026-04-14T18:36:43.092Z",
+      "count": 10,
       "outageStart": "2026-04-09T06:54:16.253Z"
     },
     "mijnzha.ziekenhuisamstelland.nl": {
@@ -178,8 +178,8 @@
       "name": "Antonius Zorggroep (Sneek)",
       "firstSeen": "2026-04-10T09:35:49.611Z",
       "outageStart": "2026-04-10T09:35:49.611Z",
-      "lastSeen": "2026-04-14T08:23:33.319Z",
-      "count": 5
+      "lastSeen": "2026-04-14T18:36:43.092Z",
+      "count": 6
     }
   }
 }
