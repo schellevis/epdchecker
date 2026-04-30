@@ -1,30 +1,6 @@
 {
-  "checkedAt": "2026-04-14T18:36:43.092Z",
+  "checkedAt": "2026-04-30T08:03:26.124Z",
   "results": [
-    {
-      "domain": "mijn.adrz.nl",
-      "name": "Admiraal De Ruyter Ziekenhuis",
-      "url": "https://mijn.adrz.nl",
-      "status": 0,
-      "ok": false,
-      "resolvedAddresses": [
-        "20.86.217.65"
-      ],
-      "isHix365": true,
-      "screenshotPath": null
-    },
-    {
-      "domain": "mijn.asz.nl",
-      "name": "Albert Schweitzer Ziekenhuis",
-      "url": "https://mijn.asz.nl",
-      "status": 0,
-      "ok": false,
-      "resolvedAddresses": [
-        "20.86.217.65"
-      ],
-      "isHix365": true,
-      "screenshotPath": null
-    },
     {
       "domain": "patientportaal.mijnantonius.nl",
       "name": "Antonius Zorggroep (Sneek)",
@@ -36,196 +12,28 @@
       "screenshotPath": "screenshots/patientportaal_mijnantonius_nl.jpg"
     },
     {
-      "domain": "mijn.bernhoven.nl",
-      "name": "Bernhoven",
-      "url": "https://mijn.bernhoven.nl",
-      "status": 0,
-      "ok": false,
+      "domain": "mijn.adrz.nl",
+      "name": "Admiraal De Ruyter Ziekenhuis",
+      "url": "https://mijn.adrz.nl",
+      "status": 200,
+      "ok": true,
       "resolvedAddresses": [
         "20.86.217.65"
       ],
       "isHix365": true,
-      "screenshotPath": null
+      "screenshotPath": "screenshots/mijn_adrz_nl.jpg"
     },
     {
-      "domain": "mijn-bovenij.hix365.nl",
-      "name": "Bovenij Ziekenhuis",
-      "url": "https://mijn-bovenij.hix365.nl",
-      "status": 0,
-      "ok": false,
+      "domain": "mijn.asz.nl",
+      "name": "Albert Schweitzer Ziekenhuis",
+      "url": "https://mijn.asz.nl",
+      "status": 200,
+      "ok": true,
       "resolvedAddresses": [
         "20.86.217.65"
       ],
       "isHix365": true,
-      "screenshotPath": null
-    },
-    {
-      "domain": "mijnbravis.hix365.nl",
-      "name": "Bravis Ziekenhuis",
-      "url": "https://mijnbravis.hix365.nl",
-      "status": 0,
-      "ok": false,
-      "resolvedAddresses": [
-        "20.86.217.65"
-      ],
-      "isHix365": true,
-      "screenshotPath": null
-    },
-    {
-      "domain": "mijn-diakonessenhuis.hix365.nl",
-      "name": "Diakonessenhuis Utrecht",
-      "url": "https://mijn-diakonessenhuis.hix365.nl",
-      "status": 0,
-      "ok": false,
-      "resolvedAddresses": [
-        "20.86.217.65"
-      ],
-      "isHix365": true,
-      "screenshotPath": null
-    },
-    {
-      "domain": "mijn.dijklander.nl",
-      "name": "Dijklander Ziekenhuis",
-      "url": "https://mijn.dijklander.nl",
-      "status": 0,
-      "ok": false,
-      "resolvedAddresses": [
-        "20.86.217.65"
-      ],
-      "isHix365": true,
-      "screenshotPath": null
-    },
-    {
-      "domain": "mijnflevoziekenhuis.hix365.nl",
-      "name": "Flevoziekenhuis",
-      "url": "https://mijnflevoziekenhuis.hix365.nl",
-      "status": 0,
-      "ok": false,
-      "resolvedAddresses": [
-        "20.86.217.65"
-      ],
-      "isHix365": true,
-      "screenshotPath": null
-    },
-    {
-      "domain": "mijn.franciscus.nl",
-      "name": "Franciscus Gasthuis & Vlietland",
-      "url": "https://mijn.franciscus.nl",
-      "status": 0,
-      "ok": false,
-      "resolvedAddresses": [
-        "20.86.217.65"
-      ],
-      "isHix365": true,
-      "screenshotPath": null
-    },
-    {
-      "domain": "mijn-ijsselland.hix365.nl",
-      "name": "IJsselland Ziekenhuis",
-      "url": "https://mijn-ijsselland.hix365.nl",
-      "status": 0,
-      "ok": false,
-      "resolvedAddresses": [
-        "20.86.217.65"
-      ],
-      "isHix365": true,
-      "screenshotPath": null
-    },
-    {
-      "domain": "mijn.lzr.nl",
-      "name": "Laurentius Ziekenhuis Roermond",
-      "url": "https://mijn.lzr.nl",
-      "status": 0,
-      "ok": false,
-      "resolvedAddresses": [
-        "20.86.217.65"
-      ],
-      "isHix365": true,
-      "screenshotPath": null
-    },
-    {
-      "domain": "mijn.meandermc.nl",
-      "name": "Meander Medisch Centrum",
-      "url": "https://mijn.meandermc.nl",
-      "status": 0,
-      "ok": false,
-      "resolvedAddresses": [
-        "20.86.217.65"
-      ],
-      "isHix365": true,
-      "screenshotPath": null
-    },
-    {
-      "domain": "patientportaal.mijnnijsmellinghe.nl",
-      "name": "Nij Smellinghe",
-      "url": "https://patientportaal.mijnnijsmellinghe.nl",
-      "status": 0,
-      "ok": false,
-      "resolvedAddresses": [
-        "83.136.192.170"
-      ],
-      "isHix365": false,
-      "screenshotPath": null
-    },
-    {
-      "domain": "client.rivas.nl",
-      "name": "Rivas Zorggroep",
-      "url": "https://client.rivas.nl",
-      "status": 0,
-      "ok": false,
-      "resolvedAddresses": [
-        "20.86.217.65"
-      ],
-      "isHix365": true,
-      "screenshotPath": null
-    },
-    {
-      "domain": "mijn.saxenburgh.nl",
-      "name": "Saxenburgh Groep",
-      "url": "https://mijn.saxenburgh.nl",
-      "status": 503,
-      "ok": false,
-      "resolvedAddresses": [
-        "20.126.244.23"
-      ],
-      "isHix365": false,
-      "screenshotPath": "screenshots/mijn_saxenburgh_nl.jpg"
-    },
-    {
-      "domain": "mijn.sjgweert.nl",
-      "name": "St. Jans Gasthuis Weert",
-      "url": "https://mijn.sjgweert.nl",
-      "status": 0,
-      "ok": false,
-      "resolvedAddresses": [
-        "20.86.217.65"
-      ],
-      "isHix365": true,
-      "screenshotPath": null
-    },
-    {
-      "domain": "mijn.tergooi.nl",
-      "name": "Tergooi MC",
-      "url": "https://mijn.tergooi.nl",
-      "status": 0,
-      "ok": false,
-      "resolvedAddresses": [
-        "20.86.217.65"
-      ],
-      "isHix365": true,
-      "screenshotPath": null
-    },
-    {
-      "domain": "mijn.zmc.nl",
-      "name": "Zaans Medisch Centrum",
-      "url": "https://mijn.zmc.nl",
-      "status": 0,
-      "ok": false,
-      "resolvedAddresses": [
-        "20.86.217.65"
-      ],
-      "isHix365": true,
-      "screenshotPath": null
+      "screenshotPath": "screenshots/mijn_asz_nl.jpg"
     },
     {
       "domain": "mijn.alrijne.nl",
@@ -262,6 +70,42 @@
       ],
       "isHix365": false,
       "screenshotPath": "screenshots/mijndossier_amsterdamumc_nl.jpg"
+    },
+    {
+      "domain": "mijn.bernhoven.nl",
+      "name": "Bernhoven",
+      "url": "https://mijn.bernhoven.nl",
+      "status": 200,
+      "ok": true,
+      "resolvedAddresses": [
+        "20.86.217.65"
+      ],
+      "isHix365": true,
+      "screenshotPath": "screenshots/mijn_bernhoven_nl.jpg"
+    },
+    {
+      "domain": "mijn-bovenij.hix365.nl",
+      "name": "Bovenij Ziekenhuis",
+      "url": "https://mijn-bovenij.hix365.nl",
+      "status": 200,
+      "ok": true,
+      "resolvedAddresses": [
+        "20.86.217.65"
+      ],
+      "isHix365": true,
+      "screenshotPath": "screenshots/mijn_bovenij_hix365_nl.jpg"
+    },
+    {
+      "domain": "mijnbravis.hix365.nl",
+      "name": "Bravis Ziekenhuis",
+      "url": "https://mijnbravis.hix365.nl",
+      "status": 200,
+      "ok": true,
+      "resolvedAddresses": [
+        "20.86.217.65"
+      ],
+      "isHix365": true,
+      "screenshotPath": "screenshots/mijnbravis_hix365_nl.jpg"
     },
     {
       "domain": "mijn.cwz.nl",
@@ -302,6 +146,30 @@
       "screenshotPath": "screenshots/mijn_dz_nl.jpg"
     },
     {
+      "domain": "mijn-diakonessenhuis.hix365.nl",
+      "name": "Diakonessenhuis Utrecht",
+      "url": "https://mijn-diakonessenhuis.hix365.nl",
+      "status": 200,
+      "ok": true,
+      "resolvedAddresses": [
+        "20.86.217.65"
+      ],
+      "isHix365": true,
+      "screenshotPath": "screenshots/mijn_diakonessenhuis_hix365_nl.jpg"
+    },
+    {
+      "domain": "mijn.dijklander.nl",
+      "name": "Dijklander Ziekenhuis",
+      "url": "https://mijn.dijklander.nl",
+      "status": 200,
+      "ok": true,
+      "resolvedAddresses": [
+        "20.86.217.65"
+      ],
+      "isHix365": true,
+      "screenshotPath": "screenshots/mijn_dijklander_nl.jpg"
+    },
+    {
       "domain": "mijn.elkerliek.nl",
       "name": "Elkerliek Ziekenhuis",
       "url": "https://mijn.elkerliek.nl",
@@ -336,6 +204,30 @@
       ],
       "isHix365": false,
       "screenshotPath": "screenshots/www_mijnetz_nl.jpg"
+    },
+    {
+      "domain": "mijnflevoziekenhuis.hix365.nl",
+      "name": "Flevoziekenhuis",
+      "url": "https://mijnflevoziekenhuis.hix365.nl",
+      "status": 200,
+      "ok": true,
+      "resolvedAddresses": [
+        "20.86.217.65"
+      ],
+      "isHix365": true,
+      "screenshotPath": "screenshots/mijnflevoziekenhuis_hix365_nl.jpg"
+    },
+    {
+      "domain": "mijn.franciscus.nl",
+      "name": "Franciscus Gasthuis & Vlietland",
+      "url": "https://mijn.franciscus.nl",
+      "status": 200,
+      "ok": true,
+      "resolvedAddresses": [
+        "20.86.217.65"
+      ],
+      "isHix365": true,
+      "screenshotPath": "screenshots/mijn_franciscus_nl.jpg"
     },
     {
       "domain": "mijn.gelreziekenhuizen.nl",
@@ -386,6 +278,18 @@
       "screenshotPath": "screenshots/mijn_hagaziekenhuis_nl.jpg"
     },
     {
+      "domain": "mijn-ijsselland.hix365.nl",
+      "name": "IJsselland Ziekenhuis",
+      "url": "https://mijn-ijsselland.hix365.nl",
+      "status": 200,
+      "ok": true,
+      "resolvedAddresses": [
+        "20.86.217.65"
+      ],
+      "isHix365": true,
+      "screenshotPath": "screenshots/mijn_ijsselland_hix365_nl.jpg"
+    },
+    {
       "domain": "mijn.ikazia.nl",
       "name": "Ikazia Ziekenhuis",
       "url": "https://mijn.ikazia.nl",
@@ -420,6 +324,18 @@
       ],
       "isHix365": false,
       "screenshotPath": "screenshots/mijn_jbz_nl.jpg"
+    },
+    {
+      "domain": "mijn.lzr.nl",
+      "name": "Laurentius Ziekenhuis Roermond",
+      "url": "https://mijn.lzr.nl",
+      "status": 200,
+      "ok": true,
+      "resolvedAddresses": [
+        "20.86.217.65"
+      ],
+      "isHix365": true,
+      "screenshotPath": "screenshots/mijn_lzr_nl.jpg"
     },
     {
       "domain": "mijn.lumc.nl",
@@ -482,6 +398,18 @@
       "screenshotPath": "screenshots/mijn_mmc_nl.jpg"
     },
     {
+      "domain": "mijn.meandermc.nl",
+      "name": "Meander Medisch Centrum",
+      "url": "https://mijn.meandermc.nl",
+      "status": 200,
+      "ok": true,
+      "resolvedAddresses": [
+        "20.86.217.65"
+      ],
+      "isHix365": true,
+      "screenshotPath": "screenshots/mijn_meandermc_nl.jpg"
+    },
+    {
       "domain": "www.mijnmcl.nl",
       "name": "Medisch Centrum Leeuwarden",
       "url": "https://www.mijnmcl.nl",
@@ -517,6 +445,18 @@
       ],
       "isHix365": false,
       "screenshotPath": "screenshots/www_mijngezondheid_net.jpg"
+    },
+    {
+      "domain": "patientportaal.mijnnijsmellinghe.nl",
+      "name": "Nij Smellinghe",
+      "url": "https://patientportaal.mijnnijsmellinghe.nl",
+      "status": 200,
+      "ok": true,
+      "resolvedAddresses": [
+        "83.136.192.170"
+      ],
+      "isHix365": false,
+      "screenshotPath": "screenshots/patientportaal_mijnnijsmellinghe_nl.jpg"
     },
     {
       "domain": "mijnnoordwest.nl",
@@ -615,6 +555,18 @@
       "screenshotPath": "screenshots/mijn_rijnstate_nl.jpg"
     },
     {
+      "domain": "client.rivas.nl",
+      "name": "Rivas Zorggroep",
+      "url": "https://client.rivas.nl",
+      "status": 200,
+      "ok": true,
+      "resolvedAddresses": [
+        "20.86.217.65"
+      ],
+      "isHix365": true,
+      "screenshotPath": "screenshots/client_rivas_nl.jpg"
+    },
+    {
       "domain": "mijn.rkz.nl",
       "name": "Rode Kruis Ziekenhuis",
       "url": "https://mijn.rkz.nl",
@@ -627,6 +579,18 @@
       ],
       "isHix365": false,
       "screenshotPath": "screenshots/mijn_rkz_nl.jpg"
+    },
+    {
+      "domain": "mijn.saxenburgh.nl",
+      "name": "Saxenburgh Groep",
+      "url": "https://mijn.saxenburgh.nl",
+      "status": 200,
+      "ok": true,
+      "resolvedAddresses": [
+        "20.126.244.23"
+      ],
+      "isHix365": false,
+      "screenshotPath": "screenshots/mijn_saxenburgh_nl.jpg"
     },
     {
       "domain": "mijn.slingeland.nl",
@@ -689,6 +653,18 @@
       "screenshotPath": "screenshots/patient_mijnantonius_nl.jpg"
     },
     {
+      "domain": "mijn.sjgweert.nl",
+      "name": "St. Jans Gasthuis Weert",
+      "url": "https://mijn.sjgweert.nl",
+      "status": 200,
+      "ok": true,
+      "resolvedAddresses": [
+        "20.86.217.65"
+      ],
+      "isHix365": true,
+      "screenshotPath": "screenshots/mijn_sjgweert_nl.jpg"
+    },
+    {
       "domain": "mijn.stjansdal.nl",
       "name": "St. Jansdal",
       "url": "https://mijn.stjansdal.nl",
@@ -711,6 +687,18 @@
       ],
       "isHix365": false,
       "screenshotPath": "screenshots/mijnskb_skbwinterswijk_nl.jpg"
+    },
+    {
+      "domain": "mijn.tergooi.nl",
+      "name": "Tergooi MC",
+      "url": "https://mijn.tergooi.nl",
+      "status": 200,
+      "ok": true,
+      "resolvedAddresses": [
+        "20.86.217.65"
+      ],
+      "isHix365": true,
+      "screenshotPath": "screenshots/mijn_tergooi_nl.jpg"
     },
     {
       "domain": "portaal.mijntjongerschans.nl",
@@ -795,6 +783,18 @@
       ],
       "isHix365": false,
       "screenshotPath": "screenshots/mijn_wza_nl.jpg"
+    },
+    {
+      "domain": "mijn.zmc.nl",
+      "name": "Zaans Medisch Centrum",
+      "url": "https://mijn.zmc.nl",
+      "status": 200,
+      "ok": true,
+      "resolvedAddresses": [
+        "20.86.217.65"
+      ],
+      "isHix365": true,
+      "screenshotPath": "screenshots/mijn_zmc_nl.jpg"
     },
     {
       "domain": "mijnzha.ziekenhuisamstelland.nl",
